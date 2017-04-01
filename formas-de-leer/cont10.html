@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css" />
+</head>
+<body>
+<script>
+$("#bread").html("<span>Etapa 2: Durante la lectura</span>");
+	$(document).on("click","input[name='radio101']",function(e) {
+		$("#rta1").show();
+		$("#radio1").prop('disabled', true);
+		$("#radio2").prop('disabled', true);
+	});
+	$(document).on("click","input[name='radio102']",function(e) {
+		$("#rta2").show();
+		$("#radio3").prop('disabled', true);
+		$("#radio4").prop('disabled', true);
+		$("#radio5").prop('disabled', true);
+		$("#radio6").prop('disabled', true);
+		$("#radio7").prop('disabled', true);
+		$("#radio8").prop('disabled', true);
+	});
+</script>
+<style>
+		.msg-yellow.s-left {
+		margin: 20px 0 20px 30px;
+		}
+</style>
+<article style="overflow-y:scroll;">
+<blockquote style="text-align:justify;" class="animated fadeInUpBig">
+	Sabemos ahora que la naturaleza de nuestro texto es <strong>descriptiva</strong>.<br/>
+	<br>
+	Esta descripción es:<br>
+	<form role="form" class="animated fadeInUpBig">
+		<div class="radio radio-success">
+			<input type="radio" name="radio101" id="radio1" value="option1">
+			<label for="radio1">
+				<strong>objetiva</strong> porque no presenta una valoración personal.
+			</label>
+		</div>
+		<div class="radio radio-danger">
+			<input type="radio" name="radio101" id="radio2" value="option2">
+			<label for="radio2">
+				<strong>subjetiva</strong> porque notamos que la descripción está influida por los sentimientos del autor.
+			</label>
+		</div>
+	</form>
+	<div id="rta1" style="display:none;" class="msg-yellow s-left animated slideInDown">
+		La descripción que se hace en el texto es <strong>objetiva</strong>. 
+	</div>
+	<br>
+	Ahora bien, ¿qué es lo que se está describiendo? (<i>Esto es lo que llamaremos el "<mark>objeto descrito</mark>"</i>)<br>
+	<form role="form" class="animated fadeInUpBig">
+		<div class="radio radio-success">
+			<input type="radio" name="radio102" id="radio3" value="option1">
+			<label for="radio3">
+				La deep web				
+			</label>
+		</div>
+		<div class="radio radio-danger">
+			<input type="radio" name="radio102" id="radio4" value="option2">
+			<label for="radio4">
+				La pornografía infantil
+			</label>
+		</div>
+		<div class="radio radio-danger">
+			<input type="radio" name="radio102" id="radio5" value="option3">
+			<label for="radio5">
+				Los iceberg
+			</label>
+		</div>
+		<div class="radio radio-danger">
+			<input type="radio" name="radio102" id="radio6" value="option4">
+			<label for="radio6">
+				El mercado negro
+			</label>
+		</div>
+		<div class="radio radio-danger">
+			<input type="radio" name="radio102" id="radio7" value="option5">
+			<label for="radio7">
+				La internet
+			</label>
+		</div>
+		<div class="radio radio-danger">
+			<input type="radio" name="radio102" id="radio8" value="option6">
+			<label for="radio8">
+				Las redes de delincuencia
+			</label>
+		</div>
+	</form>
+	<div id="rta2" style="display:none;" class="msg-yellow s-left animated slideInDown">
+		El <strong>objeto descrito</strong> es <em>"La deep web"</em>.
+	</div>
+</blockquote>
+</article>
+</body>
+</html>

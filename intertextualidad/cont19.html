@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<script>
+$("#bread").html("<span>Actividad 7</span>");
+var flag = 0;
+var total = 0;
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+    ev.preventDefault();
+	// data				: id del que arrastré
+	// ev.target.id	: id del contenedor receptor
+    var data = ev.dataTransfer.getData("text");
+	ev.target.appendChild(document.getElementById(data));
+	$("#"+data+"").css("background-color","transparent");
+	$("#"+data+"").css("font-family","inherit");
+	$("#"+data+"").css("font-size","100%");
+	$("#"+ev.target.id+"").addClass("dropped");
+	var a=-1;
+	if(data=="ans1"&&ev.target.id=="cont1") {
+		a=0
+	}
+	if(data=="ans2"&&ev.target.id=="cont2") {
+		a=0
+	}
+	if(data=="ans3"&&ev.target.id=="cont3") {
+		a=0
+	}
+	if(data=="ans4"&&ev.target.id=="cont4") {
+		a=0
+	}
+	if(data=="ans5"&&ev.target.id=="cont5") {
+		a=0
+	}
+	if(data=="ans6"&&ev.target.id=="cont6") {
+		a=0
+	}
+	if(a==-1) {
+		$("#"+ev.target.id).css("background-color","#D99694");
+		$("#"+ev.target.id).css("color","white");
+	}
+	else {
+		$("#"+ev.target.id).css("background-color","#00B050");
+		$("#"+ev.target.id).css("color","white");
+		total++;
+	}
+	flag++;
+	$("#results-1-left").html(6-flag);
+	if(flag==6) {
+		$(".draggable").attr( "draggable", "false" );
+		$("#results").append("<button type='button' style='margin-left: 15px;' class='btn btn-info' onclick='goToPage();return false'>Intentar de nuevo</button>");
+	}
+}
+</script>
+<style>
+#results {padding:10px;margin:15px 0;}
+.droppable {margin: 5px;}
+.droppable.dropped {width: auto !important;min-width:80px;}
+</style>
+<article style="overflow-y: scroll;">
+<p class="msg-yellow s-left animated fadeInLeft">¡Muy bien! Ahora nos falta descubrir el propósito de los textos que acabaste de leer. Arrastrando los conjuntos de palabras de abajo, construye cuatro oraciones que resuman el propósito de cada uno.</p>
+<br/>
+<b>El propósito del texto 7 es:</b><br/>
+<br/>
+<div class="animated fadeInLeft" style="text-align:left">
+	<div id="cont1" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)" style="display:inline-block;width:80px;height:2em;vertical-align:top;line-height: 2em;"></div>
+	<div id="cont2" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)" style="display:inline-block;width:80px;height:2em;vertical-align:top;line-height: 2em;"></div>
+	<div id="cont3" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)" style="display:inline-block;width:80px;height:2em;vertical-align:top;line-height: 2em;"></div>
+	<div id="cont4" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)" style="display:inline-block;width:80px;height:2em;vertical-align:top;line-height: 2em;"></div>
+	<div id="cont5" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)" style="display:inline-block;width:80px;height:2em;vertical-align:top;line-height: 2em;"></div>
+	<div id="cont6" class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)" style="display:inline-block;width:80px;height:2em;vertical-align:top;line-height: 2em;"></div>
+</div>
+<br/>
+<kbd id="ans1" class="draggable" draggable="true" ondragstart="drag(event)">exponer resumidamente</kbd>
+<kbd id="ans2" class="draggable" draggable="true" ondragstart="drag(event)">los aspectos políticos y militares</kbd>
+<kbd id="ans3" class="draggable" draggable="true" ondragstart="drag(event)">más importantes de</kbd>
+<kbd id="ans4" class="draggable" draggable="true" ondragstart="drag(event)">la carrera armamentística nuclear</kbd>
+<kbd id="ans5" class="draggable" draggable="true" ondragstart="drag(event)">de la Guerra Fría</kbd>
+<kbd id="ans6" class="draggable" draggable="true" ondragstart="drag(event)">entre los EE.UU. y la Unión Soviética.</kbd>
+<div id="results" class="info animated fadeInLeft"><em>Movimientos restantes:</em> <span id="results-1-left">6</span></div>
+</article>
+<br/>
+</body>
+</html>

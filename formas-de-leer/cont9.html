@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css" />
+</head>
+<body>
+<script>
+$("#bread").html("<span>Etapa 2: Durante la lectura</span>");
+	$(document).on("click","input[name='radio1']",function(e) {
+		$("#rta1").show();
+		$("#radio1").prop('disabled', true);
+		$("#radio2").prop('disabled', true);
+		$("#radio3").prop('disabled', true);
+		$("#radio4").prop('disabled', true);
+	});
+</script>
+<style>
+		.msg-yellow.s-left {
+		margin: 20px 0 20px 30px;
+		}
+</style>
+<article style="overflow-y:scroll;">
+<blockquote style="text-align:justify;" class="animated fadeInUpBig">
+	¿Sabes qué es la <kbd>superestructura textual</kbd>? Se le da este nombre a los <code>esqueletos</code> de los textos. ¿Sorprendente? Sí, los textos también tienen <em>esqueletos</em>. Así como los esqueletos de los gatos y los perros se diferencian del nuestro, existen varios tipos de superestructuras que dependen del tipo de naturaleza del texto, es decir, <code>organizan de forma diferente los contenidos</code>.
+</blockquote>
+	<p class="animated fadeInUpBig">En primer lugar, identifiquemos la naturaleza de nuestro texto, selecciona sólo una de las opciones:</p>
+	<form role="form" class="animated fadeInUpBig">
+		<div class="radio radio-danger">
+			<input type="radio" name="radio1" id="radio1" value="option1">
+			<label for="radio1">
+				Es <strong>informativo</strong> porque pretende trasmitir un acontecimiento de forma objetiva, puesto que intenta presentar un hecho o situación tal como sucedió.
+			</label>
+		</div>
+		<div class="radio radio-success">
+			<input type="radio" name="radio1" id="radio2" value="option2">
+			<label for="radio2">
+				Es <strong>descriptivo</strong> porque realiza una descripción de algún elemento, podemos identificar características que lo definen y lo diferencian, es decir, particularidades.
+			</label>
+		</div>
+		<div class="radio radio-danger">
+			<input type="radio" name="radio1" id="radio3" value="option3">
+			<label for="radio3">
+				Es <strong>narrativo</strong> porque incluye el relato de una serie de acontecimientos que suceden en un lugar y tiempo e involucra unos personajes. 
+			</label>
+		</div>
+		<div class="radio radio-danger">
+			<input type="radio" name="radio1" id="radio4" value="option4">
+			<label for="radio4">
+				Es <strong>argumentativo</strong> porque expone diversas razones para sustentar una hipótesis y de este modo convencer al lector de una idea determinada.
+			</label>
+		</div>
+	</form>
+	<div id="rta1" style="display:none;" class="msg-yellow s-left animated slideInDown">
+		La naturaleza de nuestro texto es <strong><u>descriptiva</u></strong>. 
+	</div>
+</article>
+</body>
+</html>

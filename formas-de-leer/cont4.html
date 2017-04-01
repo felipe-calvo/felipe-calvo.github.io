@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<script>
+$("#bread").html("<span>Etapa 1: Antes de leer » Actividad 1</span>");
+var timer = 1;
+function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.text(minutes + ":" + seconds);
+
+        if (--timer < 0) {
+            timer = duration;
+            removeOverlay();
+            $("#actividad-1-texto-intro").hide();
+			$("#actividad-1-texto-activo").show();
+        }
+    }, 1000);
+}
+display = $('#time');
+jQuery(function ($) {
+  $("#btn-iniciar-actividad").one('click', function(){
+      startTimer(60*0.5, display);
+  });
+});
+	var flag = 0;
+	var total = 0;
+	function allowDrop(ev) {
+		ev.preventDefault();
+	}
+	
+	function drag(ev) {
+		ev.dataTransfer.setData("text", ev.target.id);
+	}
+	
+	function drop(ev) {
+		ev.preventDefault();
+		if (ev.target.id == ""){
+			return;
+		}
+		// data				  : id del que arrastré
+		// ev.target.id	: id del contenedor receptor
+		var data = ev.dataTransfer.getData("text");
+		var reemplaza = $("#"+data+"").html();
+		$("#"+ev.target.id+"").html(reemplaza);
+		$("#"+ev.target.id+"").css({"line-height" : "normal", "text-align" : "left", "height" : "auto"});
+		var a=-1;
+		if(data=="ans1"&&ev.target.id=="cont1") {
+			a=0
+		}
+		if(data=="ans2"&&ev.target.id=="cont2") {
+			a=0
+		}
+		if(data=="ans3"&&ev.target.id=="cont3") {
+			a=0
+		}
+		if(data=="ans4"&&ev.target.id=="cont4") {
+			a=0
+		}
+		if(data=="ans5"&&ev.target.id=="cont5") {
+			a=0
+		}
+		$("#"+data+"").remove();
+		if(a==-1) {
+			$("#"+ev.target.id).css("background-color","#D99694");
+			$("#"+ev.target.id).css("color","white");
+		}
+		else {
+			$("#"+ev.target.id).css("background-color","#00B050");
+			$("#"+ev.target.id).css("color","white");
+			total++;
+		}
+		flag++;
+		if(flag==5) {
+			$(".draggable").attr( "draggable", "false" );
+			$("#results").html("<b class='animated fadeInLeft'>Respuestas Correctas</b>: "+total+"<br>");
+		}
+	}
+</script>
+<style>
+	.actividad-1-contenedor {width:90%;margin:5px auto;height:60px;padding:5px;text-align:center;background-color:#D7E3BC;line-height: 55px;}
+</style>
+<article style="overflow-y:scroll">
+<div id="actividad-1-texto-intro">
+	<blockquote style="text-align:justify;" class="animated fadeInUpBig">
+	<p>Ahora, quizá te sorprenda, pero no leeremos el texto línea por línea. Te invitamos a identificar algunos temas y subtemas del texto. ¿Cómo? Es muy, muy sencillo…<br>
+	Como podrás ver, el texto que revisarás a continuación tiene unas pistas: un título, un subtítulo, <strong>palabras resaltadas</strong>, algunas imágenes y recuadros.</p>
+	<p>Esta actividad consiste en ver el texto durante 30 segundos, fíjate en las pistas. Luego, arrastrarás y clasificarás algunos elementos del texto.</p>
+	</blockquote>
+	<div style="text-align:center;">
+		<button id="btn-iniciar-actividad" type="button" class="btn btn-success btn-lg animated flip js-open-modal" data-modal-id="texto-1">Iniciar actividad</button>
+	</div>
+</div>
+	<div id="actividad-1-texto-activo" style="display:none" class="clearfix">
+	<p>Ahora que te has fijado en las pistas, <strong>selecciona y arrastra</strong> con el puntero del mouse los elementos de la lista del costado derecho a su correspondiente clasificación en los recuadros del costado izquierdo.</p>
+	<br>
+		<div style="float:left;width:49%;height:400px;position:relative;">
+			<div id="cont1" class="actividad-1-contenedor droppable" ondrop="drop(event)" ondragover="allowDrop(event)">Título</div>
+			<div id="cont2" class="actividad-1-contenedor droppable" ondrop="drop(event)" ondragover="allowDrop(event)">Subtítulo</div>
+			<div id="cont3" class="actividad-1-contenedor droppable" ondrop="drop(event)" ondragover="allowDrop(event)">Palabras Resaltadas</div>
+			<div id="cont4" class="actividad-1-contenedor droppable" ondrop="drop(event)" ondragover="allowDrop(event)">Imágenes</div>
+			<div id="cont5" class="actividad-1-contenedor droppable" ondrop="drop(event)" ondragover="allowDrop(event)">Recuadros</div>
+		</div>
+		<div id="results" style="float:left;width:49%;height:400px">
+			<div class="table-responsive">
+				<table class="table table-hover table-striped">
+					<tr>
+						<th class="text-uppercase">Lista de elementos o pistas</th>
+					</tr>
+					<tr>
+						<td>
+							<span id="ans1" class="draggable" draggable="true" ondragstart="drag(event)">La ‘deep web’, el lado oscuro de la internet que no conocemos</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div id="ans3" class="draggable" draggable="true" ondragstart="drag(event)">
+								<ul>
+									<li>AGUSTINA GRASSO / JONATHAN AGÜERO CAJAL</li>
+									<li>Moneda propia e identidad oculta</li>
+									<li>Los riesgos</li>
+									<li>Varios niveles.</li>
+								</ul>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div id="ans5" class="draggable" draggable="true" ondragstart="drag(event)">
+								<span style="display:block;background:url('img/act-1-2.png') no-repeat, #FFF;width:82px;height:90px;border-radius:4px;margin:0 auto;"></span>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div id="ans4" class="draggable" draggable="true" ondragstart="drag(event)">
+								<span style="display:block;background:url('img/act-1-1.png') no-repeat, #FFF;width:325px;height:90px;border-radius:4px;margin:0 auto;"></span>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span id="ans2" class="draggable" draggable="true" ondragstart="drag(event)">Navegamos apenas por el 20% de la realidad virtual. El resto esconde una realidad sumergida donde se puede contratar un asesino, comprar droga o ver la pornografía más dura.</span>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div id="texto-1" class="modal-box" style="width:800px;">
+		<header>
+			<a href="#" class="js-modal-close close">×</a>
+			<h4>Texto de referencia para la actividad del módulo</h4>
+		</header>
+		<div class="modal-body" style="height:480px;overflow:scroll;font-size:17px;">
+			<img src="img/header-texto-1.png" style="display:block;margin:0 auto;width:750px;" />
+			<div style="text-align:center">
+			<h3 class="text-primary">La ‘deep web’, el lado oscuro de la internet que no conocemos </h3>
+			<h4 style="font-weight:500">Navegamos apenas por el 20% de la realidad virtual. El resto esconde una realidad sumergida donde se puede contratar un asesino, comprar droga o ver la pornografía más dura.</h4>
+			</div>
+			<hr>
+			<strong>AGUSTINA GRASSO / JONATHAN AGÜERO CAJAL</strong><br>
+			<p class="text-justify">¿Qué pasaría si un día se dijera que la realidad de todos los días es sólo el 20% de lo que verdaderamente pasa en el mundo? Ese día llegó.</p>
+			<p class="text-justify">Abrir un mail, publicar una frase en el muro de Facebook, escribir en Twitter es la punta del iceberg. Es la internet cotidiana. Pero, además, es apenas el 20% de lo que sucede en internet. El resto del bloque de hielo –donde se esconde lo más oscuro, lo prohibido, lo ilegal y lo morbo– es la “deep web” o “internet profunda”. Se puede encontrar desde una Wikipedia prohibida con teorías conspirativas, videos de ovnis, páginas de grupos terroristas, sitios con videos de contenidos perversos –pedofilia, canibalismo– hasta plataformas del mercado negro que ofrecen todo tipo de mercadería (armas y drogas) hasta instructivos para hacer bombas caseras o contratar un sicario. “Lo que diferencia la deep web de la internet tradicional es que se trata de páginas a las cuales no se puede acceder mediante los buscadores que usamos todos los días”, explica a PERFIL Raúl Martínez Fazzalari, profesor de Derecho de Nuevas Tecnologías de la Universidad de Ciencias Empresariales y Sociales (UCES).</p>
+			<p class="text-justify">Esto significa que la deep web está conformada por páginas que requieren claves o programas específicos para poder entrar en ella. Como la información está “en sitios generados dinámicamente”, al cargar esas páginas, los motores de búsqueda estándar no las encuentran.</p>
+			<br/>
+			<div style="text-align:center">
+				<img src="img/texto-1-1.jpg" style="display:block;max-width:750px;margin: 0 auto;" />
+			</div>
+			<br/>
+			<h4>Moneda propia e identidad oculta</h4>
+			<p class="text-justify">¿En la deep web se paga con dinero? No. La deep web tiene su propia moneda, llamada bitcoin, para realizar transacciones dentro de distintos sitios de compraventa. Uno de los más conocidos es Black.</p>
+			<p class="text-justify">Market, donde se pueden adquirir desde armas, drogas, hasta los servicios de un sicario. Allí uno posee una billetera virtual que se carga con este efectivo móvil sin fronteras. Un bitcoin equivale a 95 dólares. Y no es necesario cargar los datos de una tarjeta para adquirirlos. Tiene maneras particulares de conseguirse: la primera es la producción propia. “Algunos la llaman trabajo minero”, aclara Ezequiel Sallis, del área de investigaciones telemáticas de la Policía Metropolitana. La otra es “cara a cara. Es decir, encontrarse con un usuario que venda bitcoins en algún lugar público para pagarle en efectivo, mientras el vendedor deposita online los bitcoins en su número de usuario”. Otra clave para navegar en la internet profunda son programas que permiten el acceso a Onionlandia, páginas con dominios alfanuméricos a los que no se puede acceder a través de los buscadores tradicionales. Uno de los más populares es TOR, que además oculta la identidad digital.</p>
+			<br/>
+			<div style="text-align:center">
+				<img src="img/texto-1-2.jpg" style="display:block;max-width:750px;margin: 0 auto;" />
+			</div>
+			<br/>
+			<h4>Los riesgos</h4>
+			<p class="text-justify">En los foros se suele explicar que hay tres inseguridades mayores que se corren a la hora de querer ingresar. Las dos primeras son los virus informáticos y el robo de la IP (número que identifica a la computadora desde la cual se está operando).</p>
+			<p class="text-justify">“Hay que tener cuidado desde qué equipo uno vaya a ingresar porque se puede tomar tu IP y utilizarla para cometer ilícitos, como terminar formando parte de una red de tráfico de pedofilia”, advierte Martínez Fazzalari. Y el tercer peligro es el FBI. Cristian Borghello, integrante de ESET, empresa dedicada a la investigación de soluciones de seguridad informática, agrega a PERFIL que “estas redes son monitorizadas por las fuerzas del orden de varios países”. En el mismo sentido, Fazzalari afirma: “Estoy seguro de que el FBI y equipos de inteligencia tienen los equipos para rastrear todo esto. El tema de la seguridad nacional es, para los países de Europa y Estados Unidos, la prioridad. Sobre esta base rastrean todo lo que pueden, y la deep web es una herramienta más para este fin”.</p>
+			<br/>
+			<h4>Varios niveles</h4>
+			<p class="text-justify">Para explicar el concepto de la Deep Web, los técnicos utilizan la imagen de un iceberg, donde la punta es el nivel 0, la internet superficial. Allí se encuentran las páginas más familiares y con controles, como Google, YouTube, Facebook, Twitter y similares. El nivel 1 continúa siendo superficie, pero allí hay sitios menos conocidos, pero de fácil acceso, relacionados con contenidos no aptos para menores. El nivel 2 todavía no es deep web, pero hay dominios que se encuentran por buscadores independientes.</p>
+			<p class="text-justify">A partir de las próximas capas se ingresa a la internet profunda. Cristian Borghello dice que “para los niveles más profundos hace falta usar herramientas de anonimización como TOR que permite acceder a direcciones IP anónimas en donde se aloja el material a difundir. Generalmente a estas IP o URL no se las conoce y se las debe encontrar o llegar por invitación”.</p>
+			<br/>
+			<div style="text-align:center">
+				<img src="img/texto-1-3.jpg" style="display:block;max-width:750px;margin: 0 auto;" />
+			</div>
+			<br/>
+			<p class="text-justify">Desde el nivel 3, los dominios están compuestos por caracteres aleatorios. En ellas no hay publicidades, ni colores. Se puede encontrar desde películas y libros que ya no están en la superficie, hasta páginas en su mayoría con pornografía infantil, mercados de drogas y armas, entre otros. Nivel 4: los foros indican que “los niveles anteriores eran peligrosos, pero con un proxy y un buen detector de intrusos era suficiente, pero aquí no”. Se dice que el cuarto nivel está “plagado de hackers, verdaderos piratas informáticos relacionados al robo y malversación de datos”. Allí además se encuentran páginas encriptadas de fuerzas del poder, desde donde se cree que podrían haber surgido varios documentos que se filtraron en el último tiempo. Además de expedientes sobre experimentos humanos de las últimas cuatro décadas. Nivel 5: se habla de secretos militares, y se dice que al nivel 6 sólo logra acceder gente con conocimientos suficientes.</p>
+			<p class="text-justify">¿Hay intención de regular las profundidades? “En relación a las actividades ilícitas, las normas son las mismas que en la internet tradicional”, explica Sallis. Martínez Fazzalari acota que “no es que existe una norma a nivel internacional que regule los delitos. Todo depende de las denuncias que haya en cada país y de las órdenes de los jueces locales”.
+			Navegar en la deep web en la mayoría de las naciones no es ilegal. Pero hay países como China que tienen internet controlada, entonces no pueden descargarse los softwares que se necesitan para poder entrar a la parte “oculta”. Desde las fuerzas de seguridad afirman que si bien existen tratados, acuerdos y convenios de colaboración en la investigación de delitos informáticos, muchas veces no son suficientes para poder cubrir las necesidades actuales.</p>
+		</div>
+		<footer>
+			<button id="time" class="js-modal-close btn btn-warning">Tiempo restante</button>
+		</footer>
+	</div>
+</article>
+</body>
+</html>

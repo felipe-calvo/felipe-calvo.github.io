@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css" />
+</head>
+<body>
+<script>
+$("#bread").html("<span>Etapa 2: Durante la lectura</span>");
+	$(document).on("click","input[name='radio1']",function(e) {
+		$("#rta1").show();
+		$("#radio1").prop('disabled', true);
+		$("#radio2").prop('disabled', true);
+		$("#radio3").prop('disabled', true);
+		$("#radio4").prop('disabled', true);
+	});
+</script>
+<style>
+	.msg-yellow.s-left {
+    margin: 20px 0 20px 30px;
+	}
+</style>
+<article class="animated fadeInLeft">
+	<p>Ya hemos realizado varios ejercicios de aproximación al texto. Ahora, podemos responder la siguiente pregunta:<br>
+  <strong>¿Cuál crees que es el tema del texto?</strong></p>
+	<form role="form">
+		<div class="radio radio-danger">
+			<input type="radio" name="radio1" id="radio1" value="option1">
+			<label for="radio1">
+				La inseguridad informática
+			</label>
+		</div>
+		<div class="radio radio-danger">
+			<input type="radio" name="radio1" id="radio2" value="option2">
+			<label for="radio2">
+				Las redes de corrupción a nivel mundial
+			</label>
+		</div>
+		<div class="radio radio-success">
+			<input type="radio" name="radio1" id="radio3" value="option3">
+			<label for="radio3">
+				La red virtual de acceso restringido
+			</label>
+		</div>
+		<div class="radio radio-danger">
+			<input type="radio" name="radio1" id="radio4" value="option4">
+			<label for="radio4">
+				La oposición a la difusión de la cultura y la educación
+			</label>
+		</div>
+	</form>
+	<div id="rta1" style="display:none;" class="msg-yellow s-left animated slideInDown">
+		La respuesta correcta es <strong>"La red virtual de acceso restringido".</strong>
+	</div>
+</article>
+</body>
+</html>

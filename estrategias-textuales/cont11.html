@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css" />
+</head>
+<body>
+<script>
+$("#bread").html("<span>Estrategia #3: Integración</span>");
+	$(document).on("click","input[name='radio2']",function(e) {
+		$("#rta2").show();
+		$("#radio4").prop('disabled', true);
+		$("#radio5").prop('disabled', true);
+	});
+</script>
+<article>
+<div style="text-align:justify;overflow-y:scroll;height:380px;" class="animated slideInRight">
+	<p class="alert alert-info">Ahora hazlo tú. Primero lee el siguiente texto:</p>
+	<blockquote><i>Los primeros consejos dietéticos que reciben los diabéticos, una vez diagnosticados, son reducir peso mediante ejercicio y comer menos grasas y más fibra incluyendo pan y cereales y también más frutas y vegetales. Sin embargo, al igual que muchas personas sanas que quieren reducir peso, esta dieta no acaba de funcionar y después de un año del diagnóstico necesitan medicación oral para controlar los niveles de glucosa.</i></blockquote>
+	<p>Ahora observa el siguiente enunciado e indica si lo consideras como un uso adecuado de la estrategia de <kbd>Integración</kbd> aplicada al anterior texto:</p>
+	<blockquote><i>Los primeros consejos dietéticos que se diagnostican son comer menos grasas y más frutas, sin embargo esta dieta no funciona y las personas luego de un tiempo necesitan medicación.</i></blockquote>
+	<strong>La integración es:</strong><br>
+	<form role="form">
+		<div class="radio radio-danger">
+			<input type="radio" name="radio2" id="radio4" value="option1">
+			<label for="radio4">
+				Adecuada
+			</label>
+		</div>
+		<div class="radio radio-success">
+			<input type="radio" name="radio2" id="radio5" value="option2">
+			<label for="radio5">
+				Errónea
+			</label>
+		</div>
+	</form>
+	<div id="rta2" style="display:none;" class="msg-yellow s-left animated slideInDown">
+		<ul>
+			<li><b>La integración no es adecuada.</b> Recuerda que la integración, así como las otras estrategias textuales, debe mantener el sentido general del texto. Ya que el enunciado propuesto omite algo tan esencial del texto como lo es la especificación del tipo de pacientes –diabéticos-, NO hay una adecuada unificación de sus afirmaciones principales.</li>
+			<li><b><u>Por lo tanto, la integración presentada es errónea</u>.</b> El enunciado no evidencia un adecuado ejercicio de integración ya que, si bien está intentando integrar o unificar, está omitiendo una afirmación o categoría esencial para poder comprender el texto: el hecho de que los pacientes son diabéticos. Sin esta categoría no podríamos saber sobre qué tipo de enfermedad y pacientes está tratando el texto. </li>
+		</ul>
+	</div>
+</div>
+</article>
+</body>
+</html>

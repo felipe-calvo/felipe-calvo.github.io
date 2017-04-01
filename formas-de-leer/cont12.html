@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="css/mindmap.css" />
+</head>
+<body>
+<script>
+$("#bread").html("<span>Etapa 2: Durante la lectura</span>");
+var flag = 0;
+var total = 0;
+var matrixAns = [];
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+  ev.preventDefault();
+  if (ev.target.id == ""){
+			return;
+  }
+  // data			: id del que arrastré
+  // ev.target.id	: id del contenedor receptor
+  var data = ev.dataTransfer.getData("text");
+  var a = -1;
+  // Control Jerarquía 1
+  if (data == "ans1" && ev.target.id == "cont1") {
+      a = 0;
+  } else if (data == "ans2" && ev.target.id == "cont2") {
+      a = 0;
+  } else if (data == "ans3" && ev.target.id == "cont3") {
+      a = 0;
+  } else if (data == "ans4" && ev.target.id == "cont4") {
+      a = 0;
+  } else if (data == "ans5" && ev.target.id == "cont5") {
+      a = 0;
+  } else if (data == "ans6" && ev.target.id == "cont6") {
+      a = 0;
+  }
+  if (data == "ans1" && ev.target.id == "cont2" || data == "ans2" && ev.target.id == "cont1") {
+      return;
+  }
+  // Control Jerarquía 2
+
+  // Control general
+  var reemplaza = $("#" + data + "").html();
+  $("#" + ev.target.id + "").html(reemplaza);
+  $("#" + data + "").remove();
+  if (a == -1) {
+      $("#" + ev.target.id).css("background-color", "#D99694");
+      $("#" + ev.target.id).css("color", "white");
+  } else {
+      $("#" + ev.target.id).css("background-color", "#00B050");
+      $("#" + ev.target.id).css("color", "white");
+      total++;
+  }
+  flag++;
+  // Control handler jerarquías
+  if (total == 2) {
+      $("#fill-helper").html("<div class='alert alert-info animated bounceIn'>¡Muy bien! ya ubicaste el concepto principal y su definición. Ahora ubica en el mapa los subconceptos que caracterizan al concepto principal y posteriormente la lista de palabras clave que caracterizan a los subconceptos.</div>");
+      $(".mindmap121").hide();
+      $(".mindmap122").show();
+      $("#kbd-set-2").show();
+  }
+  // Control final
+  if (flag == 6) {
+      $(".draggable").attr("draggable", "false");
+      $("#fill-helper").html("<b class='animated fadeInLeft'>Respuestas Correctas</b>: " + total + ".");
+  }
+}
+</script>
+<style>
+.mindmap {
+	height:auto;
+}
+#kbd-set-1 {
+	width:460px;
+	margin:0 auto;
+}
+kbd {
+	display: inline-block;
+    width: 220px;
+	height:120px;
+    margin: 3px;
+    font-size: 11px;
+    float: left;
+}
+#kbd-set-2 kbd {
+	height:100px;
+}
+.droppable {
+  margin: 0 -5px;
+  padding: 1px 10px;
+}
+.draggable-fixed-container {
+  width:100%;
+  margin-top:14px;
+}
+kbd em {
+  display:none;
+}
+</style>
+<article style="overflow-y:scroll;">
+<blockquote style="text-align:justify;" class="animated fadeInUpBig">
+	<div id="fill-helper">Ya tenemos bastante información sobre el texto, sólo nos resta organizarla. En el siguiente mapa, arrastra los cuadros y ubícalos donde lo consideres más adecuado.<br>
+	Vamos por orden de jerarquía: ¿dónde crees que va el <strong>concepto principal?, ¿dónde su definición?.</strong>.</div>
+</blockquote>
+<div class="mindmap mindmap121 animated fadeInUpBig" style="font-size:15px !important;">
+    <div class="node node_root" style="height:auto;width:180px;">
+        <div id="cont1" class="node__text droppable elem1" style="white-space:normal;" ondrop="drop(event)" ondragover="allowDrop(event)">
+            Incluye acá el concepto principal
+        </div><input class="node__input" type="text">
+    </div>
+    <ol class="children children_rightbranch">
+        <li class="children__item">
+            <div class="node" style="height:auto;width:180px;">
+                <div id="cont2" class="node__text droppable elem2" style="white-space:normal;" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    Incluye aquí un texto explicativo.
+                </div><input class="node__input" type="text">
+            </div>
+            <ol class="children">
+                <li class="children__item">
+                    <div class="node" style="background-color:#D99694">
+                <div class="node__text">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </div><input class="node__input" type="text">
+            </div>
+            <ol class="children">
+                <li class="children__item">
+                    <div class="node" style="background-color:#C3D69B">
+                        <div class="node__text">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </div><input class="node__input" type="text">
+                    </div>
+                </li>
+                </ol>
+                </li>
+                <li class="children__item">
+                    <li class="children__item">
+                    <div class="node" style="background-color:#D99694">
+                <div class="node__text">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </div><input class="node__input" type="text">
+            </div>
+            <ol class="children">
+                <li class="children__item">
+                    <div class="node" style="background-color:#C3D69B">
+                        <div class="node__text">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </div><input class="node__input" type="text">
+                    </div>
+                </li>
+                </ol>
+                </li>
+                <li class="children__item">
+                    <li class="children__item">
+                    <div class="node" style="background-color:#D99694">
+                <div class="node__text">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </div><input class="node__input" type="text">
+            </div>
+            <ol class="children">
+                <li class="children__item">
+                    <div class="node" style="background-color:#C3D69B">
+                        <div class="node__text">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </div><input class="node__input" type="text">
+                    </div>
+                </li>
+                </ol>
+                </li>
+                <li class="children__item">
+                    <li class="children__item">
+                    <div class="node" style="background-color:#D99694">
+                <div class="node__text">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </div><input class="node__input" type="text">
+            </div>
+            <ol class="children">
+                <li class="children__item">
+                    <div class="node" style="background-color:#C3D69B">
+                        <div class="node__text">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </div><input class="node__input" type="text">
+                    </div>
+                </li>
+                </ol>
+                </li>
+            </ol>
+        </li>
+    </ol>
+</div>
+<div class="mindmap mindmap122 animated bounceIn" style="font-size:15px !important;display:none;">
+    <div class="node node_root" style="height:auto;width:180px;">
+        <div style="white-space:normal;">
+            <em>Concepto principal:</em> Deep web o internet profunda.
+        </div><input class="node__input" type="text">
+    </div>
+    <ol class="children children_rightbranch">
+        <li class="children__item">
+            <div class="node" style="height:auto;width:150px;">
+                <div style="white-space:normal;">
+                    <em>Definición:</em> Conjunto de páginas de internet a las cuales no se puede acceder desde buscadores convencionales, sino a través de programas especiales, códigos y contraseñas, debido a los contenidos de la información.
+                </div><input class="node__input" type="text">
+            </div>
+            <ol class="children">
+                <li class="children__item">
+                    <div class="node" style="background-color:#B2A2C7;height:auto;width:110px;">
+                <div class="node__text" style="white-space:normal;">
+                    Características
+                </div><input class="node__input" type="text">
+            </div>
+            <ol class="children">
+                <li class="children__item">
+                    <div class="node" style="background-color:#C3D69B;height:auto;width:180px;">
+                        <div id="cont3" class="node__text droppable elem3" style="white-space:normal;" ondrop="drop(event)" ondragover="allowDrop(event)">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </div><input class="node__input" type="text">
+                    </div>
+                </li>
+                </ol>
+                </li>
+                <li class="children__item">
+                    <li class="children__item">
+                    <div class="node" style="background-color:#B2A2C7;height:auto;width:110px;">
+                <div class="node__text" style="white-space:normal;">
+                    Niveles
+                </div><input class="node__input" type="text">
+            </div>
+            <ol class="children">
+                <li class="children__item">
+                    <div class="node" style="background-color:#C3D69B;height:auto;width:180px;">
+                        <div id="cont4" class="node__text droppable elem4" style="white-space:normal;" ondrop="drop(event)" ondragover="allowDrop(event)">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </div><input class="node__input" type="text">
+                    </div>
+                </li>
+                </ol>
+                </li>
+                <li class="children__item">
+                    <li class="children__item">
+                    <div class="node" style="background-color:#B2A2C7;height:auto;width:110px;">
+                <div class="node__text" style="white-space:normal;">
+                    Contenidos
+                </div><input class="node__input" type="text">
+            </div>
+            <ol class="children">
+                <li class="children__item">
+                    <div class="node" style="background-color:#C3D69B;height:auto;width:180px;">
+                        <div id="cont5" class="node__text droppable elem5" style="white-space:normal;" ondrop="drop(event)" ondragover="allowDrop(event)">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </div><input class="node__input" type="text">
+                    </div>
+                </li>
+                </ol>
+                </li>
+                <li class="children__item">
+                    <li class="children__item">
+                    <div class="node" style="background-color:#B2A2C7;height:auto;width:110px;">
+                <div class="node__text" style="white-space:normal;">
+                    Riesgos
+                </div><input class="node__input" type="text">
+            </div>
+            <ol class="children">
+                <li class="children__item">
+                    <div class="node" style="background-color:#C3D69B;height:auto;width:180px;">
+                        <div id="cont6" class="node__text droppable elem6" style="white-space:normal;" ondrop="drop(event)" ondragover="allowDrop(event)">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </div><input class="node__input" type="text">
+                    </div>
+                </li>
+                </ol>
+                </li>
+            </ol>
+        </li>
+    </ol>
+</div>
+<div class="clearfix">
+    	<div class="draggable-fixed-container">
+			<div id="kbd-set-1">
+				<kbd id="ans1" class="draggable animated fadeInUpBig" draggable="true" ondragstart="drag(event)"><em>Concepto principal:</em> Deep web o internet profunda.</kbd>
+				<kbd id="ans2" class="draggable animated fadeInUpBig" draggable="true" ondragstart="drag(event)"><em>Definición:</em> Conjunto de páginas de internet a las cuales no se puede acceder desde buscadores convencionales, sino a través de programas especiales, códigos y contraseñas, debido a los contenidos de la información.</kbd>
+			</div>
+			<div id="kbd-set-2" class="animated bounceIn" style="display:none;">
+				<kbd id="ans4" class="draggable" draggable="true" ondragstart="drag(event)">La internet de cada día, Antesala, Dominios de caracteres aleatorios, Onionlandia, Secretos militares, expertos</kbd>
+				<kbd id="ans6" class="draggable" draggable="true" ondragstart="drag(event)">Virus informáticos, Robo de la IP, FBI</kbd>
+				<kbd id="ans5" class="draggable" draggable="true" ondragstart="drag(event)">Teorías conspirativas, videos de ovnis, páginas de grupos terroristas, sitios con videos de contenidos perversos –pedofilia, canibalismo– hasta plataformas del mercado negro.</kbd>
+				<kbd id="ans3" class="draggable" draggable="true" ondragstart="drag(event)">Oculto, Cifrado, Riesgoso, Útil, Maneja una moneda propia, Identidad oculta</kbd>
+			</div>
+    	</div>
+  	</div>
+</article>
+</body>
+</html>

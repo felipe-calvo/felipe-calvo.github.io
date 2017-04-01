@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<script>
+$("#bread").html("<span>Etapa 3: Al final de la lectura</span>");
+var goodAnswer = "<img class='img-ans animated bounceInLeft' src='img/btn_y.png' alt='Respuesta' />";
+var badAnswer = "<img class='img-ans animated bounceInLeft' src='img/btn_x.png' alt='Respuesta' />";
+	$("#choose-1").change(function () {
+        var end = this.value;
+        if (end==1) {
+			$("#choose-1-ans").html(goodAnswer);
+		}
+		else {
+			$("#choose-1-ans").html(badAnswer);
+		}
+		$(this).prop('disabled', true);
+    });
+	$("#choose-2").change(function () {
+        var end = this.value;
+        if (end==3) {
+			$("#choose-2-ans").html(goodAnswer);
+		}
+		else {
+			$("#choose-2-ans").html(badAnswer);
+		}
+		$(this).prop('disabled', true);
+    });
+	$("#choose-3").change(function () {
+        var end = this.value;
+        if (end==2) {
+			$("#choose-3-ans").html(goodAnswer);
+		}
+		else {
+			$("#choose-3-ans").html(badAnswer);
+		}
+		$(this).prop('disabled', true);
+    });
+	$("#choose-4").change(function () {
+        var end = this.value;
+        if (end==4) {
+			$("#choose-4-ans").html(goodAnswer);
+		}
+		else {
+			$("#choose-4-ans").html(badAnswer);
+		}
+		$(this).prop('disabled', true);
+    });
+</script>
+<style>
+.form-control {
+	width:300px;
+}
+#choose-1-ans, #choose-2-ans, #choose-3-ans, #choose-4-ans {
+	position:absolute;
+	left: 330px;
+	top:12px;
+}
+	#activity-container .row {
+	padding-left:10px;
+	}
+	#activity-container .row:nth-child(odd) {
+	background-color:#F2F2F2;
+	}
+</style>
+<article style="overflow-y: scroll;">
+<p class="msg-yellow animated rollIn" style="margin:0 auto">Tomando como referencia el concepto de <strong>mentefacto</strong>, clasifica las siguientes proposiciones en la categoría conceptual correspondiente:</p>
+<br/>
+	<div id="activity-container" class="animated fadeInLeft" style="width:95%">
+	<div class="row">
+		<div class="col-md-5"><h4>Oración</h4></div>
+		<div class="col-md-3"><h4>Categoría conceptual</h4></div>
+	</div>
+	<div class="row">
+		<div class="col-md-5">La “deep web” es un tipo de red de comunicación interconectada.</div>
+		<div class="col-md-3" style="position:relative">
+			<select id="choose-1" class="form-control">
+				<option selected="true" disabled="disabled">Selecciona</option>
+				<option value="1">Supraordinada</option>
+				<option value="2">Isoordinada</option>
+				<option value="3">Excluyente</option>
+				<option value="4">Infraordinada</option>
+			</select>
+			<div id="choose-1-ans"></div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-5">La “deep web” es diferente de la red superficial porque su acceso requiere claves o programas específicos.</div>
+		<div class="col-md-3" style="position:relative">
+			<select id="choose-2" class="form-control">
+				<option selected="true" disabled="disabled">Selecciona</option>
+				<option value="1">Supraordinada</option>
+				<option value="2">Isoordinada</option>
+				<option value="3">Excluyente</option>
+				<option value="4">Infraordinada</option>
+			</select>
+			<div id="choose-2-ans"></div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-5">La “deep web” se relaciona con los leguajes encriptados: contenidos de acceso limitado, no enlazado, privado, programado.</div>
+		<div class="col-md-3" style="position:relative">
+			<select id="choose-3" class="form-control">
+				<option selected="true" disabled="disabled">Selecciona</option>
+				<option value="1">Supraordinada</option>
+				<option value="2">Isoordinada</option>
+				<option value="3">Excluyente</option>
+				<option value="4">Infraordinada</option>
+			</select>
+			<div id="choose-3-ans"></div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-5">La “deep web” puede clasificarse en niveles de profundidad: 0-6.</div>
+		<div class="col-md-3" style="position:relative">
+			<select id="choose-4" class="form-control">
+				<option selected="true" disabled="disabled">Selecciona</option>
+				<option value="1">Supraordinada</option>
+				<option value="2">Isoordinada</option>
+				<option value="3">Excluyente</option>
+				<option value="4">Infraordinada</option>
+			</select>
+			<div id="choose-4-ans"></div>
+		</div>
+	</div>
+	</div>
+</article>
+<br/>
+</body>
+</html>

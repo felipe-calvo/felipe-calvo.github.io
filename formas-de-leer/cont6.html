@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css" />
+</head>
+<body>
+<script>
+$("#bread").html("<span>Etapa 1: Antes de leer </span>");
+	$(document).on("click","input[name='radio1']",function(e) {
+		$("#rta1").show();
+		$("#radio1").prop('disabled', true);
+		$("#radio2").prop('disabled', true);
+		$("#radio3").prop('disabled', true);
+		$("#radio4").prop('disabled', true);
+	});
+</script>
+<style>
+	.msg-yellow.s-left {
+    margin: 20px 0 20px 30px;
+	}
+</style>
+<article class="animated fadeInLeft">
+	<p class="alert alert-info">Nota que los términos <strong>“Deep web”</strong> e <strong>“Internet profunda”</strong> son sinónimos. ¿De qué manera se pueden definir?</p>
+	<p>De las siguientes opciones selecciona la definición que te parezca más adecuada para definir <em>“deep web”</em> o <em>“internet profunda”</em>:</p>
+	<br>
+	<form role="form">
+		<div class="radio radio-success">
+			<input type="radio" name="radio1" id="radio1" value="option1">
+			<label for="radio1">
+				1. Es un conjunto de páginas de internet a las cuales no se puede acceder desde buscadores convencionales como google o yahoo, sino a través de programas especiales, códigos y contraseñas, debido a los contenidos de la información.
+			</label>
+		</div>
+		<div class="radio radio-danger">
+			<input type="radio" name="radio1" id="radio2" value="option2">
+			<label for="radio2">
+				2. Es la compra, venta e intercambio clandestino de productos, que violan las leyes fiscales o no pagan los impuestos requeridos.
+			</label>
+		</div>
+		<div class="radio radio-danger">
+			<input type="radio" name="radio1" id="radio3" value="option3">
+			<label for="radio3">
+				3. Es un conjunto organizado de datos, que conforman una unidad de sentido, cuyo acceso está restringido a determinados usuarios.
+			</label>
+		</div>
+		<div class="radio radio-danger">
+			<input type="radio" name="radio1" id="radio4" value="option4">
+			<label for="radio4">
+				4. Es una red informática global que permite la interconexión de distintos dispositivos, emplea protocolos TCP/IP y ofrece una gran variedad de recursos y servicios.
+			</label>
+		</div>
+	</form>
+	<div id="rta1" style="display:none;" class="msg-yellow s-left animated slideInDown">
+		La opción de respuesta que define los conceptos de <strong>“Deep web”</strong> o <strong>“Internet profunda”</strong> es la número 1.
+	</div>
+</article>
+</body>
+</html>
