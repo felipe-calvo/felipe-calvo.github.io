@@ -1,0 +1,15 @@
+---
+title: "Inferencia en dos poblaciones"
+author: "Felipe Calvo Cepeda"
+date: "2020"
+output: 
+  html_document:
+    theme: lumen
+    css: style.css
+    highlight: tango
+---
+
+https://courses.lumenlearning.com/suny-natural-resources-biometrics/chapter/chapter-4-inferences-about-the-differences-of-two-populations/#:~:text=Inferences%20about%20Two%20Means%20with%20Independent%20Samples%20(Assuming%20Unequal%20Variances,values%20in%20the%20other%20sample.&text=These%20populations%20are%20not%20related%2C%20and%20the%20samples%20are%20independent.
+
+http://www.sthda.com/english/wiki/f-test-compare-two-variances-in-r
+http://www.sthda.com/english/wiki/two-proportions-z-test-in-r

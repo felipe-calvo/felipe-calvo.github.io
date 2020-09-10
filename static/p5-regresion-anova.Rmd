@@ -1,0 +1,302 @@
+---
+title: "Pruebas para variables cuantitativas"
+author: "Felipe Calvo Cepeda"
+date: "2020"
+output: 
+  html_document:
+    theme: lumen
+    css: style.css
+    highlight: tango
+---
+
+## Instalar paquetes
+
+```{r, eval=FALSE}
+install.packages("e1071")
+```
+
+## Cargar librerías
+
+```{r, eval=FALSE}
+library("tidyverse")
+library("e1071")
+```
+
+```{r, echo=F, results='hide', message=F, warning=F}
+library("tidyverse")
+library("e1071")
+```
+
+## Importar datos
+
+```{r, results='hide', message=F, warning=F}
+read_delim(
+  file = "data/winequality-red.csv",
+  delim = ",", 
+  locale=locale(decimal_mark = ".")
+  ) -> wine_raw
+
+## Revisar la estructura de los datos
+str(wine_raw)
+
+## Le decimos a R que vamos a trabajar con esos datos y se los ponemos "en primer plano"
+attach(wine_raw)
+```
+
+Para los datos de calidad del vino ya realizamos un análisis exploratorio que nos aportó evidencia para plantear algunas relaciones entre variables. Ahora vamos a comprobar esas relaciones y a cuantificarlas.
+
+## Análisis gráfico
+
+```{r}
+### Diagrama de dispersión
+ggplot(wine_raw, aes(x=alcohol, y=quality)) + geom_point()
+
+# Diagrama de dispersión con un intervalo de confianza para la pendiente
+ggplot(wine_raw, aes(x=alcohol, y=quality)) + 
+  geom_point() +
+  geom_smooth(method=lm, se=TRUE)
+
+# Diagrama de dispersión con regresión local
+ggplot(wine_raw, aes(x=alcohol, y=quality)) + 
+  geom_point() +
+  geom_smooth()
+```
+
+Si bien se ve que existe una correlación positiva entre las variables *quality* y *alcohol* y podemos trazar en el diagrama de dispersión una línea recta con pendiente positiva, así mismo vemos que el ajuste no es tan bueno.
+
+Para tener un criterio más certero vamos a pasar del análisis gráfico al modelado y vamos a ajustar un modelo de regresión lineal.
+
+## Ajuste del modelo de regresión lineal
+
+```{r}
+# Sintaxis: lm(variable_respuesta ~ variable_explicativa + ..., data=data)
+modelo.lineal <- lm(quality ~ alcohol, data=wine_raw)
+print(modelo.lineal)
+```
+
+El modelo nos arroja un **intercepto** y un **coeficiente** para la variable alcohol, y así, podemos construir una ecuación matemática que relacione la calidad del vino en función del porcentaje de alcohol.
+
+```{r}
+quality = 1.8750 + 0.3608 * alcohol
+```
+
+## Validación del modelo
+
+Para correr un modelo de regresión lineal debemos verificar el cumplimiento de algunos supuestos:
+
+1. La **variable respuesta (y)** es numérica y los puntos son independientes.
+2. La **variable predictora (x)** es numérica fue medida sin *errores*.
+3. La forma de la relación es aproximadamente lineal. Si la relación no es lineal se puede intentar hacer algunas transformaciones.
+4. La **distribución** de los valores de (x) es más o menos uniforme, balanceada, es decir, en cada intervalo hay más o menos los mismos valores.
+5. La **distribución** de los valores de (y) es aproximadamente normal, con forma de campana, simétrica.
+6. Las respuestas de (y) a lo largo de (x) son más o menos homogéneas (= la varianza no cambia si cambio x)
+
+![](supuestos-regresion-1.png)
+
+> Nota: la regresión lineal es sensible de **outliers**.
+
+Vamos a comprobar estos supuestos.
+
+Primero vamos a utilizar el método **plot()** para producir 4 gráficas en las que tendremos que asegurarnos de:
+
+* Gráfica 1 (**residuales distribuidos normalmente**): que los residuales tengan aproximadamente el mismo promedio. Se espera una línea aproximadamente horizontal que atraviesa toda la gráfica.
+* Gráfica 2 (**datos distribuidos normalmente**): que los datos sigan una distribución aproximadamente normal. Se espera que los puntos estén aproximadamente sobre la línea recta diagonal.
+* Gráfica 3 (**homogeneidad de varianza**): que la varianza sea aproximadamente la misma a lo largo de todas las observaciones. Se espera una línea aproximadamente horizontal que atraviese toda la gráfica.
+* Gráfica 4 (**ausencia de datos atípicos**): que no hayan datos atípicos que afecten severamente el ajuste del modelo (una línea aproximadamente horizontal que atraviesa toda la gráfica).
+
+```{r}
+## Gráficas de validación
+plot(modelo.lineal)
+```
+
+Una vez inspeccionado el cumplimiento de supuestos podemos generar una tabla que cuantifica el efecto de nuestras variables.
+
+En esta tabla encontraremos:
+
+* Ecuación del modelo estadístico ajustado
+* "Box-plot" de los residuales
+* Intercepto (prueba $H_0: b=0$)
+* Pendiente (prueba $H_0: a=0$)
+* Estadísticos de ajustes $R^2$ y $R^2 ajustado$ 
+* Resumen de análisis ANOVA
+
+```{r}
+summary(modelo.lineal)
+```
+
+De la tabla podemos observar que:
+
+1. Si existe una relación aproximadamente lineal entre las variables (el p-valor del intercepto es significante)
+2. El porcentaje de alcohol si afecta la calidad del vino (el p-valor del de la variable *alcohol* es significante)
+
+Observe además el estádistico $R^2$ (siempre use el ajustado) el cual nos indica cual es la proporción de variación explicada en el modelo. En este caso el porcentaje de alcohol nos explica el 22% de la variación en la calidad.
+
+## Notas de cierre - Regresión {.tabset .tabset-pills}
+
+### Reporte de resultados
+
+Se tiene como hipótesis que la calidad del vino incrementa con el porcentaje de alcohol.
+
+Para probar la hipótesis se corrió un análisis de regresión de la calidad del vino en función del porcentaje de alcohol luego de hacer una confirmación visual de la linealidad de la relación entre las variables, la normaidad en los datos y la homogeneidad de varianza a lo largo de los rangos de porcentaje de alcohol.
+
+De acuerdo con los resultados de la regresión, la calidad del vino incrementa significativamente con el porcentaje de alcohol ($R^2 ajustado = 0.22$, $P < 2.2e-16$).
+
+En promedio, la calidad del vino incrementa $0.36 ± 0.01$ puntos ($P <2e-16$) por cada grado de alcohol.
+
+### Pasos a seguir
+
+Podemos repetir el ejercicio:
+
+1. Usando otra variable como predictora
+2. Usando más de una variable como predictora
+3. Cambiando la variable respuesta
+
+En todos los casos los procedimientos de validación e interpretación son los mismos.
+
+## Ajuste de un modelo ANOVA
+
+También llamados modelos de análisis de varianza, nos permiten poner a prueba qué tanta influencia tiene una variable predictora (x) que tiene más de dos niveles (factores) sobre una variable de respuesta (y) contínua.
+
+Ejemplos de factores:
+
+* *turno*: mañana, tarde, noche
+* *escolaridad*: bachillerato, pregrado, posgrado
+* *estrato_socioeconomico*: 1, 2, 3, 4, 5, 6
+
+![](boxplot-ejemplo-anova-1-via.png)
+
+Siguiendo el ejemplo de la producción del vino, se extrajeron 4 muestras de vinos fabricados a partir de sepas de uvas ubicadas en zonas geográficas distintas y se les midió el porcentaje de alcohol.
+
+¿Afecta la sepa de la uva el porcentaje de alcohol?
+
+## Cargar librerías
+
+```{r, eval=FALSE}
+library("readxl")
+```
+
+```{r, echo=F, results='hide', message=F, warning=F}
+library("readxl")
+```
+
+## Cargar datos, ajustar su estructura y calcular descriptivos
+
+```{r}
+## Cargo datos
+raw_data <- read_xlsx("data/sepas.xlsx", sheet='data')
+
+## Convierto variables respectivas a factores
+factores <- c("sepa")
+raw_data %>% mutate_at(factores,factor) -> data
+
+## Revisar la estructura de los datos
+str(data)
+
+## Hagamos primero unos estadísticos descriptivos
+descriptive_stats <- group_by(data, sepa) %>%
+  summarise(
+    count = n(),
+    mean = mean(alcohol, na.rm = TRUE),
+    sd = sd(alcohol, na.rm = TRUE)
+  )
+descriptive_stats
+
+## Boxplot por grupos/factores
+ggplot(data = data) +
+  aes(x = sepa, y = alcohol) +
+  geom_boxplot(fill = "#0c4c8a") +
+  theme_minimal()
+```
+
+En R los modelos ANOVA se ajustan por medio del método **aov()**. Vamos a hacer el ajuste del modelo y a guardar los resultados en una variable llamado modelo.anova
+
+```{r}
+## ANOVA
+modelo.anova <- aov(alcohol ~ sepa, data = data)
+summary(modelo.anova)
+```
+
+> Podemos observar que el **p-valor** para la variable sepa es significante, es decir, tenemos evidencia estadística para concluir que los cambios vistos en el porcentaje del alcohol no se deben al azar y son producto de la sepa.
+
+Al igual que en los modelos de regresión, los modelos ANOVa también cuentan con unos supuestos que deben ser verificados.
+
+1. Varianza homogénea entre grupos. Lo verificaremos con una prueba estadística **Test de Levene** cuya hipótesis nula es que la varianza es la misma a lo largo de todos los factores.
+2. Los residuales se distribuyen normalmente. Lo verificaremos con una prueba estadística llamada **Test de Shapiro** cuya hipótesis nula es que el conjunto de datos sigue una distribución aproximadamente normal.
+
+En ambas pruebas para comprobar los supuestos nuestro interés es no rechazar la hipótesis.
+
+```{r, eval=FALSE}
+## Instalamos la librería car que contiene el método para probar el supuesto #1
+installed.packages("car")
+
+## La cargamos
+library("car")
+```
+
+```{r, echo=F, results='hide', message=F, warning=F}
+library("car")
+```
+
+```{r}
+## Comprobación de supuestos
+
+## Varianza homogénea entre grupos
+leveneTest(alcohol ~ sepa, data = data)
+modelo.anova_residuals <- residuals(object = modelo.anova)
+plot(modelo.anova, 1) # Plot de residuales
+
+## Residuales distribuidos normalmente
+shapiro.test(x = modelo.anova_residuals)
+plot(modelo.anova, 2) # Plot Q-Q
+```
+
+Dado que en ambas pruebas no rechazamos la hipótesis nula podemos concluir que nuestros modelo ANOVA es apto para analizar la relación entre las variables de interés, y específicamente en este caso, que la **sepa** sí afecta el **porcentaje de alcohol** del vino.
+
+## Análisis Post-HOC para el ANOVA
+
+Hasta ahora concluimos, a partir de evidencia estadística, que la sepa sí afecta el porcentaje de alcohol. Sin embargo, ¿cómo podríamos profundizar en explicar esos efectos?
+
+Para esto haremos lo que en estadística se llaman análisis post-hoc los cuales nos permiten examinar con mayor detalle las diferencias ya comprobadas. Dicho de otra manera, haremos análisis post hoc sí y solo sí el modelo ANOVA es significante y nos interesa conocer cómo diferentes los grupos/factores.
+
+Aunque existen varios análisis post hoc, llevaremos a cabo el llamado **Tukey HSD** el cual es ampliamente usado y aceptado.
+
+En R este análisis lo haremos mediante el método **TukeyHSD()** que nos permitirá comparar todos los grupos de a parejas con la hipótesis nula de que sus valores promedios son los mismos. 
+
+```{r}
+## Análisis Post hoc
+TukeyHSD(modelo.anova)
+```
+
+## Notas para los modelos ANOVA {.tabset .tabset-pills}
+
+### Número de efectos
+
+En este caso comprobamos y detallamos el efecto de 1 factor llamado **sepa** sobre una variable contínua llamada **alcohol**. Estos modelos también son llamados ANOVA de una vía.
+
+Si tuvíesemos otro factor de interés podríamos construir un modelo con dos factores y una variable respuesta. Estos modelos son llamados ANOVA de dos vías.
+
+### Si fallan los supuestos
+
+Si la comprobación de supuestos falla al nivel de confianza deseado entonces se deben seguir otros procedimientos para comprobar si existen efectos entre las variables de interés. Estos procedimientos hacen parte del campo de la estadística no paramétrica.
+
+## {-}
+
+Vamos a suponer que al hacer la comprobación de supuestos estos fueron rechazados. Para sortear estas restricciones, manteniendo el mismo problema de interés, podemos hacer de una prueba no paramétrica llamada **Test de Kruskall Wallis** la cual podemos llamar con el método **kruskal.test()**.
+
+```{r}
+## Kruskall Wallis
+kruskal.test(alcohol ~ sepa, data = data)
+```
+
+Esta prueba tiene como hipótesis que no existen diferencias en la variable de respuesta al cambiar los grupos/factores, es decir, que *no hay efectos*.
+
+En este caso $p-= 9.978e-10$ por lo que podemos rechazar la hipótesis y concluir que sí existe un efecto de la sepa sobre el porcentaje de alcohol del vino.
+
+> Note que usando tanto un modelo ANOVA (paramétrico) como un test de Kruskall Wallis (no paramétrico) estamos concluyendo lo mismo.
+
+Al igual que en el caso paramétrico, si comprobamos que existen efectos y si nos interesa ver las diferencias entre los grupos/factores, tendríamos que conducir un análisis post hoc.
+
+* Existen análisis post hoc para modelos ANOVA
+* Existen análisis post hoc para pruebas de Kruskall Wallis
+
+&nbsp;

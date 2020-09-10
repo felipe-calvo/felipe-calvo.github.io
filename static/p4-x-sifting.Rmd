@@ -1,0 +1,461 @@
+---
+title: "X-sifting"
+author: "Felipe Calvo Cepeda"
+date: "2020"
+output: 
+  html_document:
+    theme: lumen
+    css: style.css
+    highlight: tango
+---
+
+## Cargar librerías
+
+```{r, eval=FALSE}
+library("tidyverse")
+```
+
+```{r, echo=F, results='hide', message=F, warning=F}
+library("tidyverse")
+```
+
+
+## Importar datos
+
+```{r, results='hide', message=F, warning=F}
+read_delim(
+  file = "data/winequality-red.csv",
+  delim = ",", 
+  locale=locale(decimal_mark = ".")
+  ) -> wine_raw
+
+## Revisar la estructura de los datos
+str(wine_raw)
+
+## Le decimos a R que vamos a trabajar con esos datos y se los ponemos "en primer plano"
+attach(wine_raw)
+```
+
+## Información sobre el conjunto de datos
+
+### Información general
+
+Los datos corresponden a una variación de un vino tradicional portugués llamado *"Vinho Verde"* proveniente de una región llamada Vinho, ubicada muy al norte de Portugal.
+
+### Variables
+
+* **fixed acidity**: ácidos del vino que no se evaporan fácilmente.
+* **volatile acidity**: cantidad de ácido acético en el vino, el cual en altas cantidades genera sensaciones no placenteras y un sabor vinagroso.
+* **citric acid**: cantidad de ácido cítrico en pequeñas cantidades, el cual añade cierta *frescura* y sabor al vino.
+* **residual sugar**: cantidad de azucar residual luego del proceso de fermentación. Es raro tener menos de 1g/litro y los vinos con más de 45g/litro se consideran dulces.
+* **chlorides**: cantidad de sal en el vino.
+* **free sulfur dioxide**: cantidad de dióxido de azufre (S0~2~) libre, el cual previene el crecimiento de microbios y la oxidación del vino.
+* **total sulfur dioxide**: cantidad total de dióxido de azufre (S0~2~) en forma libre y fija; en bajas concentraciones es indetectable, en concentraciones superiores a 50ppm el SO~2~ es evidente para la nariz y el sabor del vino.
+* **density**: la densidad del vino es cercana a la del agua dependiendo de la cantidad de azucar y alcohol.
+* **pH**: describe qué tan ácido o básico es un vino en un escala desde cero (muy ácido) hasta 14 (muy básico); la gran mayoría de vinos tienen un pH entre 3-4.
+* **sulphates**: un aditivo que contribuye a regular los niveles de dióxido de azufre (S0~2~), el cual actúa como antimicrobios y antioxidante.
+* **alcohol**: porcentaje del alcohol del vino.
+* **quality**: puntuación del vino basada en datos sensoriales, en una escala entre 0 y 10.
+
+### Fuente
+
+Cortez, P., Cerdeira, A., Almeida, F., Matos, T., & Reis, J. (2009). Modeling wine preferences by data mining from physicochemical properties. Decision Support Systems, 47(4), 547-553.
+
+> Note que es **muy importante** tener un contexto sobre el conjunto de datos.
+
+## Dimensionalidad de los datos
+
+```{r}
+dim(wine_raw)
+```
+
+* 1599 individuos - Número de filas
+* 12 variables - Número de columnas
+
+> Todos los cálculos y procedimientos matemáticos y estadísticos, a nivel computacional, se realizan mediante operaciones sobre matrices.
+
+```{r}
+## Obtener solo el número de filas
+nrow(wine_raw)
+
+## Obtener solo el número de columnas
+ncol(wine_raw)
+```
+
+
+## Limpieza de los datos
+
+En la práctica la calidad de los datos puede estar afectada por los procesos de captura, sistematización y distribución. **Siempre** hay que verificar la calidad de nuestros datos.
+
+* Nombrado adecuado de las variables
+* Datos faltantes
+* Valores duplicados
+
+### Nombrado adecuado de las variables
+
+* [Cómo nombrar las cosas](http://www2.stat.duke.edu/~rcs46/lectures_2015/01-markdown-git/slides/naming-slides/naming-slides.pdf)
+
+Vamos a dejar los nombres de las columnas sin espacios.
+
+```{r}
+names(wine_raw) <- str_replace_all(names(wine_raw), c(" " = "_"))
+```
+
+### Datos faltantes
+
+```{r}
+sapply(wine_raw, function(x) sum(is.na(x)))
+```
+
+En caso que se encuentren datos faltantes se pueden utilizar procesos de imputación de datos, entre otros:
+
+* Usando la media de la variable
+* HotDeck
+* MICE
+
+### Valores duplicados
+
+Podemos buscar y eliminar duplicados basados en un columna, por ejemplo, cuando esperamos tener datos únicos de un individuo y tenemos una columna para identificarlo.
+
+```{r, eval=FALSE}
+## Ejemplo: acá dejamos valores únicos en la columna pH
+distinct(wine_raw, pH, .keep_all = TRUE)
+
+## Ejemplo: acá dejamos valores únicos en la columna density
+distinct(wine_raw, density, .keep_all = TRUE)
+```
+
+Podemos buscar y eliminar duplicados basados en toda la fila.
+
+```{r, eval=FALSE}
+distinct(wine_raw)
+```
+
+## Análisis descriptivo
+
+### Resumen numérico
+
+El método **summary()** que trae por defecto R nos brinda estadísticas de resumen para cada una de las variables de nuestro conjunto de datos.
+
+```{r}
+## Resumen básico de datos
+summary(wine_raw)
+```
+
+### Resumen gráfico
+
+```{r, message=F, warning=F}
+## Cargamos la librería ggplot2
+library(ggplot2)
+
+## Usamos el método para graficar histogramas
+## Seleccionamos como objetivo la variable quality
+ggplot(wine_raw, aes(quality)) +
+    geom_histogram()
+```
+
+> Note que podemos hacer histogramas para las demás variables. Además, podríamos realizar otros tipos de gráficos univariados.
+
+> Nuestro interés ahora será construir resúmenes numéricos y resúmenes gráficos entre dos o más variables.
+
+## Efectos de una variable sobre otra
+
+En una investigación o estudio podemos sospechar de la influencia o efecto de un conjunto de variables sobre una variable particular de interés (**CTQ: Critical to quality**). Una parte esencial de la fase de análisis es reunir evidencia estadística suficiente para seleccionar las variables que sí tienen un efecto real sobre nuestra variable de interés.
+
+![](x_y_desing.png)
+
+Existen distintas herramientas estadísticas para tener una idea bien formada de cómo se relacionan dos o más variables entre sí.
+
+Antes de explorar dichas herramientas, conviene hacer una revisión sobre algunos conceptos.
+
+### Asociación entre dos variables contínuas
+
+La **covarianza** es una medida numérica que nos permite cuantificar la relación (lineal) entre dos variables contínuas.
+
+<embed style="margin:12px auto;display:block;" src="cov-def.svg" type="image/svg+xml" />
+
+Su estimador es la covarianza muestral:
+
+<embed style="margin:12px auto;display:block;" src="cov-estimator.svg" type="image/svg+xml" />
+
+* Si dos variables son **independientes** su covarianza es nula. El reciproco no es cierto en general, si dos variables tienen covarianza nula se dice que son incorreladas (no hay relación lineal, aunque puede haber una relación no lineal).
+* Si la covarianza es positiva indica que a valores grandes de X le corresponden valores grandes de Y (i.e. al incrementar X se incrementa Y) y se dice que hay una relación lineal positiva.
+* Si la covarianza es negativa indica que a valores grandes de X le corresponden valores pequeños de Y (i.e. al incrementar X, Y disminuye) y se dice que hay una relación lineal negativa.
+
+Cuanto mayor es el valor (absoluto) de la covarianza, mayor es el grado de relación lineal entre las variables. Sin embargo, su valor depende de las escala de las variables por lo que es difícil determinar cuando es grande o pequeña. Para medir el grado de relación lineal puede ser preferible reescalarla, i.e. emplear el **coeficiente de correlación**:
+
+<embed style="margin:12px auto;display:block;" src="cor-def.svg" type="image/svg+xml" />
+
+Su estimador es el coeficiente de correlación muestral:
+
+<embed style="margin:12px auto;display:block;" src="cor-estimator.svg" type="image/svg+xml" />
+
+* Una correlación positiva entre dos variables indica que a medida que los valores de una variable crecen los valores de la otra variable también crecen. Y viceversa. El máximo valor de una correlación positiva es 1.
+* Una correlación negativa entre dos variables indica que a medida que los valores de una variable crecen los valores de la otra variable decrecen. El máximo valor de una correlación negativa es -1.
+* Una correlación de cero entre dos variables indica que no existe una asociación lineal entre ellas.
+
+Dado que el trabajo estadístico de datos es principalmente matricial y tenemos un número finito de **variables aleatorias**, en vez de calcular la covarianza entre dos variables podemos construir una **matriz de covarianzas** y calcular las covarianzas entre todas las variables.
+
+**Covarianzas en R**
+
+```{r}
+## Covarianzas entre dos variables
+cov(wine_raw$fixed_acidity, wine_raw$quality)
+cov(wine_raw$chlorides, wine_raw$quality)
+
+## Matriz de varianzas y covarianzas
+cov(wine_raw)
+```
+
+**Correlaciones en R**
+
+```{r}
+## Correlaciones entre dos variables
+cor(wine_raw$fixed_acidity, wine_raw$quality, method = 'pearson')
+cor(wine_raw$chlorides, wine_raw$quality, method = 'pearson')
+
+## Matriz de correlaciones
+cor(wine_raw, method = 'pearson')
+```
+
+> Por defecto el método **cor()** calcula una correlación de Pearson, por tanto, el resultado numerico asume que la relación entre las variables es lineal. Dado que en la practica hay muchas relaciones no lineales, una forma más robusta de calcular la asociación es calculando una **correlación de Spearman** (*method = 'spearman'*) o el estadístico **Tau de Kendall** (*method = 'kendall'*).
+
+> Que exista una asociación *fuerte* entre dos variables no implica una relación causal. Para testear la causalidad veremos otras herramientas más adelante.
+
+**Visualización de la relación entre variables**
+
+Hemos visto que podemos crear gráficos univariados para tener una *fotografía* del comportamiento de una variable. De igual manera, es posible construir gráficos que muestren la asociación entre dos o más variables.
+
+Variable 1 | Variable 2 | Visualización
+------------- | ------------- | -------------
+Categórica | Categórica | Tablas de contingencia
+Categórica | Contínua | Boxplot por grupos
+Contínua | Contínua | Diagrama de dispersón
+
+Para nuestro ejemplo del vino rojo, siguiendo las recomendaciones de la tabla, conviene crear diagramas de dispersión.
+
+**Diagrama de dispersión**
+
+Son útiles porque al *cruzar* los valores de un par de variables podemos encontrar posibles relaciones matemáticas entre ellas.
+
+<embed style="margin:12px auto;display:block;" src="scatterplot_different_relations.svg" type="image/svg+xml" />
+
+```{r}
+## Una relación lineal inexistente
+plot(wine_raw$residual_sugar, wine_raw$quality)
+
+## Una relación lineal positiva
+plot(wine_raw$alcohol, wine_raw$quality)
+
+## Una relación lineal negativa
+plot(wine_raw$volatile_acidity, wine_raw$quality)
+```
+
+
+**Correlogramas**
+
+Podemos crear una visualización donde se muestren todos los posibles diagramas de dispersión entre parejas de variables con sus respectivos coeficientes de correlación.
+
+```{r, eval=FALSE}
+## Instalamos la librería GGally
+install.packages('GGally')
+
+## Cargamos la librería
+library('GGally')
+
+## Creamos la visualización usando el método ggpairs()
+ggpairs(
+  wine_raw, 
+  title="Correlograma"
+  ) 
+```
+
+```{r, echo=F, message=F, warning=F}
+library('GGally')
+ggpairs(wine_raw, title="Correlograma")
+```
+
+Podemos graficar filtrando ciertas variables de interés. En este caso, vamos a remover aquellas que tengan un coeficiente de correlación menor a 0.2 con nuestra variable CTQ (quality). 
+
+```{r}
+## Declaramos un vector con nuestras variables de interés
+var_interes = c('volatile_acidity','citric_acid','sulphates','alcohol','quality')
+
+## Creamos la visualización usando el método ggpairs() agregando el parámetro columns
+ggpairs(
+  wine_raw, 
+  title="Correlograma",
+  columns = var_interes
+  ) 
+```
+
+Otra forma de visualizar la correlación entre variables.
+
+```{r}
+ggcorr(
+  wine_raw, 
+  method = c("everything", "pearson"),
+  size = 3
+  )
+```
+
+De las anteriores matrices y gráficas podemos observar algunas nuevas correlaciones de interés, por ejemplo, entre el pH y la acidéz. Podemos observar además que para la **CTQ** aproximadamente la mitad de las variables independientes correlacionan positivamente y la otra mitad negativamente. 
+
+En la práctica, se seleccionan las variables independientes que tienen las medidas de asociación más altas en la medida que nos aportan más información. Una regla de oro sencilla es excluir variables que tengan una correlación menor (en valor absoluto) a 0.2.
+
+### Examen detallado de variables de interés
+
+De nuestro conjunto de datos iniciales hemos detectado ciertas variables independientes o explicativas que nos pueden aportar mayor información para explicar la calidad del vino. 
+
+* volatile_acidity
+* citric_acid
+* sulphates
+* alcohol
+
+Vamos ahora a examinarlas individualmente por medio de un **boxplot** en el que *cruzaremos* los valores de cada una con la puntuación obtenida en el vino. 
+
+**volatile_acidity**
+
+```{r}
+p <- ggplot(wine_raw, aes(as.factor(quality), volatile_acidity))
+p + geom_boxplot()
+```
+
+**citric_acid**
+
+```{r}
+p <- ggplot(wine_raw, aes(as.factor(quality), citric_acid))
+p + geom_boxplot()
+```
+
+**sulphates**
+
+```{r}
+p <- ggplot(wine_raw, aes(as.factor(quality), sulphates))
+p + geom_boxplot()
+```
+
+**alcohol**
+
+```{r}
+p <- ggplot(wine_raw, aes(as.factor(quality), alcohol))
+p + geom_boxplot()
+```
+
+> En nuestro conjunto de datos todas las variables son contínuas. El cálculo de medidas de resumen bivariadas como las covarianzas o coeficientes de correlación, así como los resúmenes gráficos vistos, nos permiten tener una idea bien formada de si existen relaciones entre las variables y el sentido de dichas relaciones.
+
+> Vamos ahora a examinar cómo podemos hacer el mismo proceso de análisis cuando tenemos variables **categóricas**.
+
+```{r}
+## Partimos de la base de datos 'wine_raw'
+## y la ontroducimos a un algoritmo de operaciones
+wine_raw %>%
+  ## mutate() crea una nueva variable llamada 'calidad'
+  ## basada en los rangos ya conocidos de la variable quality
+  mutate(
+    calidad = ifelse(
+      quality == '3' | quality == '4','baja',
+      ifelse(
+        quality == '5' | quality == '6','media',
+        'alta'))
+  ) %>% 
+  ## mutate_at() recibe la columna 'calidad' y la convierte en un factor
+  mutate_at('calidad', factor) %>%
+  
+  ## mutate() crea una nueva variable llamada 'acetico'
+  ## basada en rangos conocidos de la variable 'volatile_acidity'
+  mutate(
+    acetico = ifelse(volatile_acidity < 0.7, 'bajo', 'alto')
+  ) %>% 
+  ## mutate_at() recibe la columna 'acetico' y la convierte en un factor
+  ## el resultado de todas las operaciones se guarda en 'wine_processed'
+  mutate_at('acetico', factor) -> wine_processed
+```
+
+Dado que transformamos nuestro conjunto de datos para agregar dos nuevas columnas categóricas, podemos explorar algunas medidas y gráficas relevantes para asociar 1) una variable categórica con una contínua, 2) dos variables categóricas.
+
+### Asociación entre una variable categórica y una variable contínua
+
+<!-- https://medium.com/@outside2SDs/an-overview-of-correlation-measures-between-categorical-and-continuous-variables-4c7f85610365 -->
+
+En este caso no podemos calcular covarianzas ni correlaciones de Pearson, luego debemos disponer de otro conjunto de herramientas.
+
+* Correlación biserial-puntual
+* Regresión logística
+* Prueba de Kruskall-Wallis
+
+Por facilidad, haremos una **prueba de Kruskall-Wallis** cuyo p-valor nos indicará si existe una relación significante entre las variables.
+
+* **Hipótesis nula**: las variables son independientes.
+* **Hipótesis alternativa**: las variables son dependientes.
+
+```{r}
+kruskal.test(wine_processed$volatile_acidity, wine_processed$calidad)
+kruskal.test(wine_processed$citric_acid, wine_processed$calidad)
+kruskal.test(wine_processed$sulphates, wine_processed$calidad)
+kruskal.test(wine_processed$alcohol, wine_processed$calidad)
+```
+
+**Visualización**
+
+En este caso podemos construir un boxplot para cruzar cada grupo de calidad con las variables de interés.
+
+```{r}
+ggplot(data = wine_processed) +
+  aes(x = calidad, y = volatile_acidity) +
+  geom_boxplot(fill = "#0c4c8a") +
+  theme_minimal()
+
+ggplot(data = wine_processed) +
+  aes(x = calidad, y = citric_acid) +
+  geom_boxplot(fill = "#0c4c8a") +
+  theme_minimal()
+
+ggplot(data = wine_processed) +
+  aes(x = calidad, y = sulphates) +
+  geom_boxplot(fill = "#0c4c8a") +
+  theme_minimal()
+
+ggplot(data = wine_processed) +
+  aes(x = calidad, y = alcohol) +
+  geom_boxplot(fill = "#0c4c8a") +
+  theme_minimal()
+```
+
+### Asociación entre dos variables categóricas
+
+En este caso conviene hacer análisis mediante tablas de contingencia, las cuales cuentan las frecuencias observadas en cada categoría.
+
+```{r}
+tbl = table(wine_processed$acetico, wine_processed$calidad) 
+tbl
+
+# Damos nombre a las columnas y las filas 
+colnames(tbl) <- c("Calidad alta", "Calidad baja", "Calidad media")
+rownames(tbl) <- c("Ácido acético alto","Ácido acético bajo")
+tbl
+```
+
+Al tener conformada la tabla de contingencia, la forma de revisar si existe una asociación entre las variables es por medio de una **prueba de independencia X^2^** (Chi-Cuadrado).
+
+La prueba indicará si dos características son independientes o tienen una asociación, de manera que las frecuencias elevadas en una de ellas suele ser acompañado con frecuencias altas en la otra.
+
+* **Hipótesis nula**: las columnas y las filas de la tabla son independientes
+* **Hipótesis alternativa**: las columnas y las filas son dependientes
+
+```{r}
+## Prueba Chi-Cuadrado
+chisq.test(tbl)
+```
+
+## Observaciones de cierre
+
+Identificar las relaciones existentes entre dos o más variables es parte arte y parte ciencia, por lo que se recomienda ganar experiencia leyendo articulos cientificos y viendo soluciones a diversos problemas.
+
+Además,
+
+1. Hay que procurar trabajar con **variables informativas**, es decir, que guarden una relación con la variable objetivo.
+2. Hay que evitar las redundancias, luego lo ideal es que nuestras variables explicativas/independientes/features sean **independientes** entre sí.
+3. Nuestra intuición puede fallar en dimensiones superiores a 3. En la mayoría de los casos aumentar la cantidad de variables afecta negativamente el entendimiento de un problema si no contamos con una gran cantidad de datos. Por ultimo, una **cantidad controlada de variables** asegura una mejor interpretabilidad de los análisis y modelos.
+
+&nbsp;

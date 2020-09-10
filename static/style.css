@@ -1,0 +1,38 @@
+body {
+	line-height: 24px;
+}
+
+blockquote {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+	margin: 20px 0
+}
+
+.h1, .h2, .h3, h1, h2, h3 {
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+img {
+	display: block;
+    margin: 0 auto;
+}
+
+h1.title {
+	margin: 0 0 15px;
+    background-color: #17365D;
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    padding: 20px;
+}
+
+.level3 {
+	margin-left: 16px;
+}
+
+.tab-content {
+    border: 1px dashed #31859B;
+    background-color: #DBEEF3;
+}
