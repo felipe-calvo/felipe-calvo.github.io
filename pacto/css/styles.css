@@ -10075,7 +10075,7 @@ img::-moz-selection {
 #mainNav .navbar-toggler {
   padding: 0.75rem;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  font-size: 0.75rem;
+  font-size: 1rem;
   color: #fff;
   text-transform: uppercase;
   background-color: #fed136;
@@ -10460,6 +10460,13 @@ section#participa .btn-primary{
   display: block;
   margin: 0 auto;
   width: 50%;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+  word-wrap: break-word;
+  word-break: break-all;
+  word-break: break-word;
 }
 .footer {
   background-color: #EA5B4B;
@@ -10589,4 +10596,17 @@ section#actores .btn-primary{
 		margin-top: 0;
 		padding-bottom: 100%;
 	}
+}
+.actor-ruta {
+	cursor: default !important;
+}
+.btn-ejes-home {
+	color: #fff;
+    background-color: #544F9B;
+    border-color: #544F9B;
+}
+.btn-encuesta-home {
+	color: #fff;
+    background-color: #D6579B !important;
+    border-color: #D6579B !important;	
 }
