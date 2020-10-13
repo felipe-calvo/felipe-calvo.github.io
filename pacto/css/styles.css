@@ -10613,3 +10613,21 @@ section#actores .btn-primary{
     background-color: #D6579B !important;
     border-color: #D6579B !important;	
 }
+.tension-creditos {
+	display: block;
+    background-color: black;
+    color: white;
+    padding: 18px 12px 12px;
+    margin-top: -32px;
+	margin-bottom:16px;	
+}
+@media (min-width: 750px) {
+	.tension-creditos {
+		display: block;
+		background-color: black;
+		color: white;
+		padding: 12px;
+		margin-top: -18px;
+		margin-bottom:16px;
+	}
+}
