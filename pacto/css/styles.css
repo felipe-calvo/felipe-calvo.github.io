@@ -10584,6 +10584,9 @@ section#actores .btn-primary{
 }
 .parent-actores {
   padding: 12px 0;
+  /* background-color: rgba(0,0,0,0.5); */
+}
+.parent-datos {
   background-color: rgba(0,0,0,0.5);
 }
 .encuesta-2030 {
