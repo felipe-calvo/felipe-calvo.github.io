@@ -10195,10 +10195,25 @@ header.masthead .container {
 	  font-size: 2.7rem;
 	}
 }
-
 @media (min-width: 990px) {
 	header.masthead .masthead-heading {
 	  font-size: 3.25rem;
+	}
+}
+.estrategia-header {
+	font-size: 1.6rem;
+	width: 90%;
+    margin: 0 auto;
+	word-break: break-word;
+}
+@media (min-width: 766px) {
+	.estrategia-header {
+		font-size: 2.2rem;
+	}
+}
+@media (min-width: 990px) {
+	.estrategia-header {
+		font-size: 2.5rem;
 	}
 }
 .acerca-de-texto-titulo {
@@ -10251,6 +10266,15 @@ kbd{
 }
 .img-panelista {
 	border-radius: 100px;
+}
+.moderador {
+	margin-top: -2rem;
+}
+.moderador span {
+	background-color: #000;
+	color: #FFF;
+	padding: 5px 8px;
+	font-size: 1rem;
 }
 .panelista {
 	text-shadow: -1px 0 #5E17EB, 0 1px #5E17EB, 1px 0 #5E17EB, 0 -1px #5E17EB;
