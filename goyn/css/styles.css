@@ -10078,7 +10078,7 @@ img::-moz-selection {
   font-size: 1rem;
   color: #fff;
   text-transform: uppercase;
-  background-color: #fed136;
+  background-color: #5E17EB;
   border: 0;
 }
 #mainNav .navbar-brand {
@@ -10156,7 +10156,7 @@ header.masthead .masthead-subheading {
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 header.masthead .masthead-heading {
-  font-size: 3.25rem;
+  font-size: 2.7rem;
   font-weight: 800;
   line-height: 3.25rem;
   margin-bottom: 1.5rem;
@@ -10190,18 +10190,64 @@ header.masthead .container {
 	margin-top: 6rem;
 }
 }
+@media (min-width: 766px) {
+	header.masthead .masthead-heading {
+	  font-size: 2.7rem;
+	}
+}
+
+@media (min-width: 990px) {
+	header.masthead .masthead-heading {
+	  font-size: 3.25rem;
+	}
+}
 .acerca-de-texto-titulo {
 	text-shadow: -1px 0 #F10DA4, 0 1px #F10DA4, 1px 0 #F10DA4, 0 -1px #F10DA4;
 	color: #FFF;
-	font-size: 2.5rem;
-	line-height: 2.25rem;
+	font-size: 2.2rem;
+	line-height: 2.2rem;
 	margin-bottom: 1rem;
 	font-weight: 800;
 	line-height: 3rem;
 }
+@media (min-width: 766px) {
+	.acerca-de-texto-titulo {
+		font-size: 2.2rem;
+		line-height: 2.2rem;
+	}
+}
+
+@media (min-width: 990px) {
+	.acerca-de-texto-titulo {
+		font-size: 2.5rem;
+		line-height: 2.25rem;
+	}
+}
 .acerca-de-texto-descripcion {
-	font-size: 1.7rem;
-	line-height: 2.25rem;	
+	font-size: 1.3rem;
+	line-height: 1.75rem;	
+}
+@media (min-width: 990px) {
+	.acerca-de-texto-descripcion {
+		font-size: 1.7rem;
+		line-height: 2.25rem;	
+	}
+}
+kbd{
+	padding:6px 12px;
+	font-size: 1.5rem;
+	color:#fff;
+	background-color:#F10DA4;
+	font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+@media (min-width: 990px) {
+	kbd{
+		font-size: 2rem;
+	}
+}
+.potencial {
+	display: block;
+	margin: 10px 0;
 }
 .img-panelista {
 	border-radius: 100px;
@@ -10209,6 +10255,16 @@ header.masthead .container {
 .panelista {
 	text-shadow: -1px 0 #5E17EB, 0 1px #5E17EB, 1px 0 #5E17EB, 0 -1px #5E17EB;
 	color: #C5B2ED;
+}
+@media (min-width: 766px) {
+	.panelista {
+		font-size: 1.7rem;
+	}
+}
+@media (min-width: 990px) {
+	.panelista {
+		font-size: 2rem;
+	}
 }
 .panelista-rol {
 	font-size: 1.2rem !important;
@@ -10229,10 +10285,120 @@ header.masthead .container {
     margin: 0 auto;
 }
 .titulillo {
-	font-size: 2.2rem !important;
+	font-size: 1.4rem !important;
+	word-break: break-word;
+	margin-top: 0.8rem;
+}
+@media (min-width: 990px) {
+	.titulillo {
+		font-size: 1.8rem !important;
+		margin-top: 0.8rem;
+	}
 }
 .contacto-equipo {
-	font-size: 16px;
+	font-size: 12px;
+}
+@media (min-width: 1199.98px) {
+	.contacto-equipo {
+		font-size: 16px;
+	}
+}
+@media (max-width: 835px) {
+	.rol-equipo {
+		font-size: 1rem;
+	}
+}
+.evento-ejes {
+	font-size: 1.5rem;
+	font-weight: 800;
+	margin: 2.5rem 0 1.5rem;
+}
+.evento-ejes span {
+	font-size: 1.2rem;
+	font-weight: 800;
+	display: block;
+}
+@media (min-width: 990px) {
+	.evento-ejes {
+		font-size: 2rem;
+	}
+	.evento-ejes span {
+		font-size: 1.6rem;
+	}
+}
+#evento .text-muted {
+	font-size: 1.1rem;
+}
+@media (min-width: 990px) {
+	#evento .text-muted {
+		font-size: 1.3rem;
+	}
+}
+#agenda {
+	background-image: url("../assets/img/fondo-panel-1.png");
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: center left;
+	background-size: cover;
+	padding-bottom: 0;
+}
+#agenda-2 {
+	background-image: url("../assets/img/fondo-panel-2.png");
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: center left;
+	background-size: cover;
+	padding-bottom: 0;
+}
+#agenda-3 {
+	background-image: url("../assets/img/fondo-panel-3.png");
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: center left;
+	background-size: cover;
+	padding-bottom: 0;
+}
+#agenda-4 {
+	background-image: url("../assets/img/fondo-panel-4.jpg");
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: center left;
+	background-size: cover;
+	padding-bottom: 0;
+}
+#contacto {
+	padding-top: 0 !important;
+}
+.img-contacto {
+	display: block;
+	margin: 0 auto;
+}
+.fucsia {
+	color: #F10DA4;
+}
+.rosado-claro {
+	background-color: #FFE0ED;
+}
+.morado {
+	color: #5E17EB;
+}
+.azul {
+	color: #5E17EB;
+}
+.t-400 {
+	font-weight: 400;
+}
+.t-700 {
+	font-weight: 700;
+}
+.t-800 {
+	font-weight: 800;
+}
+@media (min-width: 750px) {
+	.img-about {
+		max-width: 150%;
+		margin-left: -160px;
+	}
 }
 .footer {
   background-color: #F10DA4;
@@ -10309,158 +10475,7 @@ figure:hover img.zoom-in {
   left: 125%;
  }
 }
-kbd{
-	padding:6px 12px;
-	font-size: 2rem;
-	color:#fff;
-	background-color:#F10DA4;
-	font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-}
-.potencial {
-	display: block;
-	margin: 10px 0;
-}
-.evento-ejes {
-	font-size: 2rem;
-	font-weight: 800;
-	margin: 2.5rem 0 1.5rem;
-}
-.evento-ejes span {
-	font-size: 1.6rem;
-	font-weight: 800;
-	display: block;
-}
-#agenda {
-	background-image: url("../assets/img/fondo-panel-1.png");
-	background-repeat: no-repeat;
-	background-attachment: scroll;
-	background-position: center left;
-	background-size: cover;
-	padding-bottom: 0;
-}
-#agenda-2 {
-	background-image: url("../assets/img/fondo-panel-2.png");
-	background-repeat: no-repeat;
-	background-attachment: scroll;
-	background-position: center left;
-	background-size: cover;
-	padding-bottom: 0;
-}
-#agenda-3 {
-	background-image: url("../assets/img/fondo-panel-3.png");
-	background-repeat: no-repeat;
-	background-attachment: scroll;
-	background-position: center left;
-	background-size: cover;
-	padding-bottom: 0;
-}
-#agenda-4 {
-	background-image: url("../assets/img/fondo-panel-4.jpg");
-	background-repeat: no-repeat;
-	background-attachment: scroll;
-	background-position: center left;
-	background-size: cover;
-	padding-bottom: 0;
-}
-#contacto {
-	padding-top: 0 !important;
-}
-.img-contacto {
-	display: block;
-	margin: 0 auto;
-}
-.timeline-image .icono-ruta {
-	font-size: 1.7rem;
-}
-@media (min-width: 992px) {
-	.timeline-image .icono-ruta {
-		font-size: 4rem;
-	}
-}
-section#actores {
-  background-color: #212529;
-  background-image: url("../assets/img/marcha-difuminada.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-}
-section#actores .section-heading {
-  color: #fff;
-}
-section#actores .btn-primary{
-  background-color: #544F9B;
-  border-color: #544F9B;
-  display: inline-block;
-  margin: 0 auto;
-  max-width: 70%;
-  margin: 6px 0;
-}
-.parent-actores {
-  padding: 12px 0;
-  /* background-color: rgba(0,0,0,0.5); */
-}
-.parent-datos {
-  background-color: rgba(0,0,0,0.5);
-}
-.encuesta-2030 {
-  margin-top: 50px;
-  padding-bottom: 130%;
-  overflow-x: hidden;
-}
-@media (min-width: 750px) {
-	.encuesta-2030 {
-		margin-top: 0;
-		padding-bottom: 100%;
-	}
-}
-.actor-ruta {
-	cursor: default !important;
-}
-.btn-ejes-home {
-	color: #fff;
-    background-color: #544F9B;
-    border-color: #544F9B;
-}
-.btn-encuesta-home {
-	color: #fff;
-    background-color: #D6579B !important;
-    border-color: #D6579B !important;	
-}
-.tension-creditos {
-	display: block;
-    background-color: black;
-    color: white;
-    padding: 18px 12px 12px;
-    margin-top: -32px;
-	margin-bottom:16px;	
-}
-@media (min-width: 750px) {
-	.tension-creditos {
-		display: block;
-		background-color: black;
-		color: white;
-		padding: 12px;
-		margin-top: -18px;
-		margin-bottom:16px;
-	}
-}
-.fucsia {
-	color: #F10DA4;
-}
-.rosado-claro {
-	background-color: #FFE0ED;
-}
-.morado {
-	color: #5E17EB;
-}
-.azul {
-	color: #5E17EB;
-}
-.t-400 {
-	font-weight: 400;
-}
-.t-700 {
-	font-weight: 700;
-}
-.t-800 {
-	font-weight: 800;
+.aliados-parrila {
+	width: 85%;
+	padding-bottom: 12px;
 }
