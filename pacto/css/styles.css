@@ -6131,7 +6131,21 @@ button.bg-dark:focus {
 .embed-responsive-1by1::before {
   padding-top: 100%;
 }
+.video-container {
+	position:relative;
+	padding-bottom:56.25%;
+	padding-top:30px;
+	height:0;
+	overflow:hidden;
+}
 
+.video-container iframe, .video-container object, .video-container embed {
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+}
 .flex-row {
   flex-direction: row !important;
 }
@@ -9825,7 +9839,9 @@ header.masthead .masthead-heading {
 .portfolio-modal .close-modal:hover {
   opacity: 0.3;
 }
-
+.content-modal p, .content-modal ul li{
+  text-align: justify;	
+}
 .timeline {
   position: relative;
   padding: 0;
@@ -10036,6 +10052,16 @@ section#participa .btn-primary{
   font-size: 0.7rem;
   color: white;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+.footer-bogota {
+    background-image: url("../assets/img/footer-bogota.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.footer-bogota-azul {
+	display: block;
+	margin: 0 auto;
+	width: 100%;
 }
 .img-responsive {
   height: auto;
