@@ -10058,10 +10058,13 @@ section#participa .btn-primary{
     background-repeat: no-repeat;
     background-size: cover;
 }
+.footer-bogota-parent {
+	max-width: 100%;
+}
 .footer-bogota-azul {
 	display: block;
 	margin: 0 auto;
-	width: 100%;
+	max-width: 100%;
 }
 .img-responsive {
   height: auto;
