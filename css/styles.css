@@ -1,0 +1,68 @@
+html {
+    color: #444;
+    font: 18px 'Source Sans Pro', sans-serif;
+    font-size: 16px;
+}
+body {
+    padding: 2em 2em;
+    margin: 0 auto;
+}
+
+h1, h2, h3 {
+    font-family: Roboto, sans-serif;
+    font-weight: 500;
+}
+h1 {
+    font-size: 1.4rem;
+}
+h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+h3 {
+    font-size: 1.15rem;
+    margin: 0.5rem 0 0 0;
+}
+p {
+    font-size: 1.2rem;
+}
+li {
+    font-size: 1.10rem;
+    margin-bottom: 0.2rem;
+}
+ul {
+    margin-top: 0rem;
+}
+a {
+    color: #07a;
+}
+
+.container {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+.avatar img {
+    max-width: 20rem;
+}
+.credits {
+    margin-top: 1rem;
+}
+
+@media (min-width: 768px) {
+    .container {
+        -webkit-flex-direction: row;
+        flex-direction: row;
+    }
+    .avatar img {
+        max-width: 25rem;
+    }
+    .description {
+        padding-left: 2.5rem;
+    }
+}
