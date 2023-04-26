@@ -310,9 +310,9 @@
 				img.src = URL.createObjectURL(profileImage);
 				img.onload = () => {
 					ctx.save();
-					roundedImage(420,230,260,260,130);
+					roundedImage(420,230,280,280,140);
 					ctx.clip();
-					ctx.drawImage(img, 420, 230, 260, 260);
+					ctx.drawImage(img, 420, 230, 280, 280);
 					ctx.restore();
 					
 					// Add the title, sector and description to the image
