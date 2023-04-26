@@ -198,6 +198,8 @@
 				  <td><label class='inline' for="paleta2">Violeta-Dorado</label></td>
 				  <td><input class='inline' type="radio" id="paleta3" name="paleta" value="3"></td>
 				  <td><label class='inline' for="paleta3">Turquesa-Violeta</label></td>
+				  <td><input class='inline' type="radio" id="paleta4" name="paleta" value="4"></td>
+				  <td><label class='inline' for="paleta4">Azul-Dorado</label></td>
 			</tr>
 			</tbody>
 			</table>
@@ -299,8 +301,10 @@
 				bg.src = "https://felipe-calvo.github.io/static/scrd/plantilla-rojo-amarillo.png";
 			} else if (paleta == "2") {
 				bg.src = "https://felipe-calvo.github.io/static/scrd/plantilla-fucsia-amarillo.png";
-			} else {
+			} else if (paleta == "3") {
 				bg.src = "https://felipe-calvo.github.io/static/scrd/plantilla-verde-fucsia.png";
+			} else {
+				bg.src = "https://felipe-calvo.github.io/static/scrd/plantilla-azul-dorado.png";
 			}
 			bg.onload = () => {
 				ctx.drawImage(bg, 0, 0, 720, 720);
