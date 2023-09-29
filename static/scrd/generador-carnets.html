@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Consejos de Cultura (SDACP) - Generador de carnets</title>
+	<link href='https://fonts.googleapis.com/css?family=Source%20Sans%20Pro' rel='stylesheet'/>
+	<style type="text/css">
+		body {
+			font-family: 'Source Sans Pro', Helvetica, Arial;
+		}
+		.container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			background-color: #f5f5f5;
+		}
+		.header-logo {
+			margin: 20px 0;
+			width: 600px;
+		}
+		.welcome {
+			font-size: 18px;
+			margin: 20px 0;
+			text-align: center;
+			width: 800px;
+			border: 3px dashed #455EB5;
+			padding: 20px;
+			text-align: justify;
+		}
+		.form {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			margin-bottom: 20px;
+		}
+		.form input {
+			margin: 10px;
+			padding: 5px;
+			border-radius: 5px;
+			border: none;
+			font-size: 16px;
+		}
+		.form textarea {
+			margin: 10px;
+			padding: 5px;
+			border-radius: 5px;
+			border: none;
+			font-size: 16px;
+			resize: none;
+			height: 100px;
+		}
+		.btn {
+			padding: 10px;
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			border-radius: 5px;
+			font-size: 16px;
+			cursor: pointer;
+		}
+		.hidden {
+			display: none;
+		}
+		.boton {
+		  background-image: linear-gradient(92.88deg, #455EB5 9.16%, #5643CC 43.89%, #673FD7 64.72%);
+		  border-radius: 8px;
+		  border-style: none;
+		  box-sizing: border-box;
+		  color: #FFFFFF;
+		  cursor: pointer;
+		  flex-shrink: 0;
+		  font-family: 'Source Sans Pro', Helvetica, Arial;
+		  font-size: 16px;
+		  line-height: 4rem;
+		  font-weight: 500;
+		  height: 4rem;
+		  padding: 0 1.6rem;
+		  text-align: center;
+		  text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
+		  transition: all .5s;
+		  user-select: none;
+		  -webkit-user-select: none;
+		  touch-action: manipulation;
+		  width:100%;
+		}
+
+		.boton:hover {
+		  box-shadow: rgba(80, 63, 205, 0.5) 0 1px 30px;
+		  transition-duration: .1s;
+		}
+
+		@media (min-width: 768px) {
+		  .boton {
+			padding: 0 2.6rem;
+		  }
+		}
+		textarea, .textarea {
+		  margin-top: 10px;
+		  margin-left: 50px;
+		  width: 500px;
+		  height: 20px;
+		  -moz-border-bottom-colors: none;
+		  -moz-border-left-colors: none;
+		  -moz-border-right-colors: none;
+		  -moz-border-top-colors: none;
+		  background: none repeat scroll 0 0 rgba(0, 0, 0, 0.07);
+		  border-color: -moz-use-text-color #FFFFFF #FFFFFF -moz-use-text-color;
+		  border-image: none;
+		  border-radius: 6px 6px 6px 6px;
+		  border-style: none solid solid none;
+		  border-width: medium 1px 1px medium;
+		  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12) inset;
+		  color: #555555;
+		  font-family: 'Source Sans Pro', Helvetica, Arial;
+		  font-size: 1em;
+		  line-height: 1.4em;
+		  padding: 5px 8px;
+		  transition: background-color 0.2s ease 0s;
+		}
+		textarea:focus {
+			background: none repeat scroll 0 0 #FFFFFF;
+			outline-width: 0;
+		}
+		.inline {
+			display: inline-block !important;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+	<img class='header-logo' src='https://felipe-calvo.github.io/static/scrd/sistema-acp.png' alt='SDACP'/>
+	<div class='welcome'>
+	A través de este aplicativo se generan los carnets para consejeros del Sistema Distrital de Arte, Cultura y Patrimonio. <br>
+	<br/>
+	<a href='https://drive.google.com/drive/folders/1KCYguHdxs-pjLaywVj4HqojeuAvzsmUo?usp=sharing' target='_blank'>Haga click acá para acceder a la carpeta donde están los datos de los consejeros</a>.<br/>
+	<br/>
+	Diligencie el aplicativo completo para cada consejero/a, haga clic en el botón <b>"Crear carnet"</b>, verifique el resultado y para finalizar haga clic derecho sobre la imagen generada, guárdela en su computador y luego cárguela en la carpeta de carnets del respectivo consejo.
+	</div>
+		<form class="form" onsubmit="generateImage(); return false;">
+			<br/>
+			<input type="file" accept="image/*" id="profile-image" class="hidden" required>
+			<label class='boton' for="profile-image">1. Haga clic para seleccionar la foto</label>
+			
+			<br/>
+			
+			<div>Descargue la foto desde la carpeta del consejero y cárguela en la página <a href='https://pfpmaker.com/' target='_blank'>PFP Maker</a> haciendo clic en el botón <b>"Upload photo"</b> y descargando una foto cuadrada con fondo azul. </div>
+
+			<br/>
+			<img class='header-logo' style='width:474px !important' src='https://felipe-calvo.github.io/static/scrd/ejemplo-foto-perfil.jpg' alt='Ejemplo'/>
+			<br/>
+			
+			<label class='boton' for="nombrecompleto">2. Ingrese el nombre completo del consejero/a:</label>
+			
+			<br/>
+			
+			<input type="text" id="nombrecompleto" class='textarea' placeholder="Ingrese el nombre...">
+			
+			<br/>
+			
+			<p class='boton'>3. Seleccione el tipo de documento:</p>
+			
+			<table>
+			<tbody>
+			<tr>
+				  <td><input class='inline' type="radio" id="doccc" name="tipodoc" value="C.C. " checked></td>
+				  <td><label class='inline' for="candidato">Cédula de ciudadanía (C.C.)</label></td>
+				  <td><input class='inline' type="radio" id="docce" name="tipodoc" value="C.E. "></td>
+				  <td><label class='inline' for="candidata">Cédula de extranjería (C.E.)</label></td>
+				  <td><input class='inline' type="radio" id="docpe" name="tipodoc" value="P.E. "></td>
+				  <td><label class='inline' for="candidate">Permiso Especial (P.E.)</label></td>
+			</tr>
+			</tbody>
+			</table>
+			
+			<br/>
+			
+			<label class='boton' for="docnum">4. Ingrese el número de documento</label>
+			
+			<br/>
+			
+			<input type="text" id="docnum" class='textarea' placeholder="Ingrese el número de documento...">
+			
+			<br/>
+
+			<label class='boton' for="consejo">5. Ingrese el consejo</label>
+			
+			<br/>
+			
+			<input type="text" id="consejo" class='textarea' placeholder="Ingrese el consejo...">
+			
+			<br/>
+			
+			<p class='boton'>6. Tratamiento:</p>
+			
+			<table>
+			<tbody>
+			<tr>
+				  <td><input class='inline' type="radio" id="consejero" name="tratamiento" value="CONSEJERO"></td>
+				  <td><label class='inline' for="candidato">Consejero</label></td>
+				  <td><input class='inline' type="radio" id="consejera" name="tratamiento" value="CONSEJERA"></td>
+				  <td><label class='inline' for="candidata">Consejera</label></td>
+			</tr>
+			</tbody>
+			</table>
+			
+			<br/>
+
+			<button class="btn" type="submit">Crear carnet</button>
+		</form>
+
+		<div id="image-container"></div>
+		
+		<br/>
+		
+	</div>
+
+	<script type="text/javascript">
+		function generateImage() {
+			const profileImage = document.getElementById('profile-image').files[0];
+			const nombrecompleto = document.getElementById('nombrecompleto').value;
+			const tipodoc = document.querySelector('input[name="tipodoc"]:checked').value;
+			const docnum = document.getElementById('docnum').value;
+			const consejo = document.getElementById('consejo').value;
+			const tratamiento = document.querySelector('input[name="tratamiento"]:checked').value;
+			// const postulacion = tratamiento + "Sector " + sector;
+
+			// Create a canvas element
+			const canvas = document.createElement('canvas');
+			canvas.width = 415;
+			canvas.height = 642;
+			
+			// Function to circle image
+			// Que la imagen cuadrada quede envuelta en un círculo
+			function roundedImage(x,y,width,height,radius){
+				  ctx.beginPath();
+				  ctx.moveTo(x + radius, y);
+				  ctx.lineTo(x + width - radius, y);
+				  ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+				  ctx.lineTo(x + width, y + height - radius);
+				  ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+				  ctx.lineTo(x + radius, y + height);
+				  ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+				  ctx.lineTo(x, y + radius);
+				  ctx.quadraticCurveTo(x, y, x + radius, y);
+				  ctx.closePath();
+			}
+
+			// Insertamos una fuente personalizada para el canvas
+			let myFont = new FontFace(
+			  "Source Sans Pro",
+			  "url(https://fonts.gstatic.com/s/sourcesanspro/v21/6xK3dSBYKcSV-LCoeQqfX1RYOo3qNq7lqDY.woff2)"
+			);
+
+			myFont.load().then((font) => {
+			  document.fonts.add(font);
+			  console.log("Font loaded");
+			});
+			
+			// Habilita salto de línea en textos largos llamando 
+			// context.fillText recurrentemente
+			function printAtWordWrap( context , text, x, y, lineHeight, fitWidth)
+				{
+					fitWidth = fitWidth || 0;
+					
+					if (fitWidth <= 0)
+					{
+						context.fillText( text, x, y );
+						return;
+					}
+					var words = text.split(' ');
+					var currentLine = 0;
+					var idx = 1;
+					while (words.length > 0 && idx <= words.length)
+					{
+						var str = words.slice(0,idx).join(' ');
+						var w = context.measureText(str).width;
+						if ( w > fitWidth )
+						{
+							if (idx==1)
+							{
+								idx=2;
+							}
+							context.fillText( words.slice(0,idx-1).join(' '), x, y + (lineHeight*currentLine) );
+							currentLine++;
+							words = words.splice(idx-1);
+							idx = 1;
+						}
+						else
+						{idx++;}
+					}
+					if  (idx > 0)
+						context.fillText( words.join(' '), x, y + (lineHeight*currentLine) );
+				}
+
+			// Draw the dummy background image on the canvas
+			const ctx = canvas.getContext('2d');
+			const bg = new Image();
+			bg.crossOrigin="anonymous";
+			bg.src = "https://felipe-calvo.github.io/static/scrd/fondo-carnet-sdacp.png";
+			bg.onload = () => {
+				ctx.drawImage(bg, 0, 0, 415, 642);
+				
+				// Draw the profile image on the canvas
+				const img = new Image();
+				img.src = URL.createObjectURL(profileImage);
+				img.onload = () => {
+					ctx.save();
+					// position x, position y, widht, height, border-radius
+					roundedImage(100,230,215,215,140);
+					ctx.clip();
+					ctx.drawImage(img, 100, 230, 215, 215);
+					ctx.restore();
+					
+					// Add tratamiento, nombre, id data, instancia, expiration date, and disclaimer
+					ctx.fillStyle = "#e3af3e";
+					ctx.font = "bold 38px Source Sans Pro";
+					ctx.fillText(title, 34, 280, 360);
+					ctx.fillStyle = "#FFFFFF";
+					ctx.font = "bold 30px Source Sans Pro";
+					ctx.fillText(postulacion, 34, 330, 360);
+					ctx.fillStyle = "#e3af3e";
+					ctx.font = "24px Source Sans Pro";
+					printAtWordWrap(ctx, description, 36, 370, 28, 360);
+
+					// Convert the canvas to a data URL and display the image
+					const imageContainer = document.getElementById('image-container');
+					const dataURL = canvas.toDataURL('image/png');
+					imageContainer.innerHTML = `<img crossorigin="anonymous" src="${dataURL}" alt="Generated Image">`;
+				}
+			};
+		}
+	</script>
+</body>
+</html>
