@@ -223,7 +223,7 @@
 			const docnum = document.getElementById('docnum').value;
 			const consejo = document.getElementById('consejo').value;
 			const tratamiento = document.querySelector('input[name="tratamiento"]:checked').value;
-			// const postulacion = tratamiento + "Sector " + sector;
+			const identificacion = tipodoc + docnum;
 
 			// Create a canvas element
 			const canvas = document.createElement('canvas');
@@ -313,15 +313,28 @@
 					ctx.restore();
 					
 					// Add tratamiento, nombre, id data, instancia, expiration date, and disclaimer
-					ctx.fillStyle = "#e3af3e";
-					ctx.font = "bold 38px Source Sans Pro";
-					ctx.fillText(title, 34, 280, 360);
-					ctx.fillStyle = "#FFFFFF";
-					ctx.font = "bold 30px Source Sans Pro";
-					ctx.fillText(postulacion, 34, 330, 360);
-					ctx.fillStyle = "#e3af3e";
-					ctx.font = "24px Source Sans Pro";
-					printAtWordWrap(ctx, description, 36, 370, 28, 360);
+					// position x, position y, max-width
+					
+					// Tratamiento
+					ctx.fillStyle = "#000000";
+					ctx.font = "bold 12px Source Sans Pro";
+					ctx.fillText(tratamiento, 220, 460, 100);
+					
+					// Nombre
+					ctx.fillStyle = "#000000";
+					ctx.font = "bold 12px Source Sans Pro";
+					ctx.fillText(nombrecompleto, 20, 490, 375);
+					
+					// Datos de identificación
+					ctx.fillStyle = "#000000";
+					ctx.font = "bold 12px Source Sans Pro";
+					ctx.fillText(identificacion, 20, 510, 375);
+					
+					// Instancia
+					// position x, position y, max-width, max-height
+					ctx.fillStyle = "#000000";
+					ctx.font = "12px Source Sans Pro";
+					printAtWordWrap(ctx, consejo, 20, 550, 375, 60);
 
 					// Convert the canvas to a data URL and display the image
 					const imageContainer = document.getElementById('image-container');
