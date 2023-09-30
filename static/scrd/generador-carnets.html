@@ -224,6 +224,7 @@
 			const consejo = document.getElementById('consejo').value;
 			const tratamiento = document.querySelector('input[name="tratamiento"]:checked').value;
 			const identificacion = tipodoc + docnum;
+			const vence = "Vence: 2026-12-31";
 
 			// Create a canvas element
 			const canvas = document.createElement('canvas');
@@ -259,7 +260,7 @@
 			
 			// Habilita salto de línea en textos largos llamando 
 			// context.fillText recurrentemente
-			function printAtWordWrap( context , text, x, y, lineHeight, fitWidth)
+			function printAtWordWrap(context, text, x, y, lineHeight, fitWidth)
 				{
 					fitWidth = fitWidth || 0;
 					
@@ -307,9 +308,9 @@
 				img.onload = () => {
 					ctx.save();
 					// position x, position y, widht, height, border-radius
-					roundedImage(100,230,215,215,140);
+					roundedImage(117,200,180,180,90);
 					ctx.clip();
-					ctx.drawImage(img, 100, 230, 215, 215);
+					ctx.drawImage(img, 117, 200, 180, 180);
 					ctx.restore();
 					
 					// Add tratamiento, nombre, id data, instancia, expiration date, and disclaimer
@@ -317,24 +318,30 @@
 					
 					// Tratamiento
 					ctx.fillStyle = "#000000";
-					ctx.font = "bold 12px Source Sans Pro";
-					ctx.fillText(tratamiento, 220, 460, 100);
+					ctx.font = "bold 16px Source Sans Pro";
+					ctx.fillText(tratamiento, 165, 405, 90);
 					
 					// Nombre
 					ctx.fillStyle = "#000000";
-					ctx.font = "bold 12px Source Sans Pro";
-					ctx.fillText(nombrecompleto, 20, 490, 375);
+					ctx.font = "bold 20px Source Sans Pro";
+					ctx.fillText(nombrecompleto, 20, 450, 375);
 					
 					// Datos de identificación
 					ctx.fillStyle = "#000000";
-					ctx.font = "bold 12px Source Sans Pro";
-					ctx.fillText(identificacion, 20, 510, 375);
+					ctx.font = "bold 20px Source Sans Pro";
+					ctx.fillText(identificacion, 20, 475, 375);
 					
 					// Instancia
-					// position x, position y, max-width, max-height
+					// context, text, x, y, lineHeight, fitWidth
 					ctx.fillStyle = "#000000";
-					ctx.font = "12px Source Sans Pro";
-					printAtWordWrap(ctx, consejo, 20, 550, 375, 60);
+					ctx.font = "20px Source Sans Pro";
+					// ctx.fillText(consejo, 20, 500, 375);
+					printAtWordWrap(ctx, consejo, 20, 500, 26, 375);
+					
+					// Datos de vencimiento
+					ctx.fillStyle = "#000000";
+					ctx.font = "bold 12px Source Sans Pro";
+					ctx.fillText(vence, 20, 560, 375);
 
 					// Convert the canvas to a data URL and display the image
 					const imageContainer = document.getElementById('image-container');
