@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Consejos de Cultura (SDACP) - Generador de carnets</title>
+	<link href='https://fonts.googleapis.com/css?family=Source%20Sans%20Pro' rel='stylesheet'/>
+	<style type="text/css">
+		body {
+			font-family: 'Source Sans Pro', Helvetica, Arial;
+		}
+		.container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			background-color: #f5f5f5;
+		}
+		.header-logo {
+			margin: 20px 0;
+			width: 600px;
+		}
+		.welcome {
+			font-size: 18px;
+			margin: 20px 0;
+			text-align: center;
+			width: 800px;
+			border: 3px dashed #455EB5;
+			padding: 20px;
+			text-align: justify;
+		}
+		.form {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			margin-bottom: 20px;
+		}
+		.form input {
+			margin: 10px;
+			padding: 5px;
+			border-radius: 5px;
+			border: none;
+			font-size: 16px;
+		}
+		.form textarea {
+			margin: 10px;
+			padding: 5px;
+			border-radius: 5px;
+			border: none;
+			font-size: 16px;
+			resize: none;
+			height: 100px;
+		}
+		.btn {
+			padding: 10px;
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			border-radius: 5px;
+			font-size: 16px;
+			cursor: pointer;
+		}
+		.hidden {
+			display: none;
+		}
+		.boton {
+		  background-image: linear-gradient(92.88deg, #455EB5 9.16%, #5643CC 43.89%, #673FD7 64.72%);
+		  border-radius: 8px;
+		  border-style: none;
+		  box-sizing: border-box;
+		  color: #FFFFFF;
+		  cursor: pointer;
+		  flex-shrink: 0;
+		  font-family: 'Source Sans Pro', Helvetica, Arial;
+		  font-size: 16px;
+		  line-height: 4rem;
+		  font-weight: 500;
+		  height: 4rem;
+		  padding: 0 1.6rem;
+		  text-align: center;
+		  text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
+		  transition: all .5s;
+		  user-select: none;
+		  -webkit-user-select: none;
+		  touch-action: manipulation;
+		  width:100%;
+		}
+
+		.boton:hover {
+		  box-shadow: rgba(80, 63, 205, 0.5) 0 1px 30px;
+		  transition-duration: .1s;
+		}
+
+		@media (min-width: 768px) {
+		  .boton {
+			padding: 0 2.6rem;
+		  }
+		}
+		textarea, .textarea {
+		  margin-top: 10px;
+		  margin-left: 50px;
+		  width: 500px;
+		  height: 20px;
+		  -moz-border-bottom-colors: none;
+		  -moz-border-left-colors: none;
+		  -moz-border-right-colors: none;
+		  -moz-border-top-colors: none;
+		  background: none repeat scroll 0 0 rgba(0, 0, 0, 0.07);
+		  border-color: -moz-use-text-color #FFFFFF #FFFFFF -moz-use-text-color;
+		  border-image: none;
+		  border-radius: 6px 6px 6px 6px;
+		  border-style: none solid solid none;
+		  border-width: medium 1px 1px medium;
+		  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12) inset;
+		  color: #555555;
+		  font-family: 'Source Sans Pro', Helvetica, Arial;
+		  font-size: 1em;
+		  line-height: 1.4em;
+		  padding: 5px 8px;
+		  transition: background-color 0.2s ease 0s;
+		}
+		textarea:focus {
+			background: none repeat scroll 0 0 #FFFFFF;
+			outline-width: 0;
+		}
+		.inline {
+			display: inline-block !important;
+		}
+h4 {margin:0;background-color:#000;color:#fff;font-size:24px;text-align:center;padding:13px;}
+.tablagris{font-size:14px;background-color:#EFEFEF;padding:10px;color:#000;border:1px dashed #cdcdcd;margin:20px;width:80%;line-height:22px;}
+	</style>
+<script src='https://www.google.com/jsapi'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js'></script>
+<script type='text/javascript'>
+        //<![CDATA[
+        function anscallback(a) {
+            var b = "<h4>Consulta de Apoyo de Movilidad</h4><div class='program-info'></div>";
+            $("#consulta").html(b);
+            programinfo = '<div class="tablagris">';
+            programinfo += '<b>Nombre del Consejero(a)</b><br/>' + a[3] + "<br/>";
+            programinfo += '<b>Consejo</b><br/>' + a[1] + "<br/>";
+            programinfo += '<b>Sector</b><br/>' + a[2] + "<br/>";
+            programinfo += '<b>Estado de participación</b><br/>' + a[6] + "<br/>";
+            programinfo += '<b>Fecha de recarga en 2023</b><br/>' + toString(a[9]) + "<br/>";
+            programinfo += '<b>Situación 2024</b><br/>' + a[10] + "<br/>";
+            programinfo += "</div>";
+            $(".program-info").prepend(programinfo);
+        }
+  $(window).load(function() {
+            $("#cons").click(function() {
+                program = $("#numdoc").val();
+              console.log(program);
+                $("#consulta").html('<img src="https://lh3.googleusercontent.com/-A6xlhPOOg_U/U0w-d2E_wXI/AAAAAAAAIqQ/MS7bIR4QpRE/s00/loading-results-unacademia.GIF" border="0" class="no" style="display:block;margin:0 auto;width:128px;height:128px;" />');
+                "" == program ? $("#consulta").html("<span class='error-msg'>Ingrese primero el documento</span>") : $.ajax({
+                    dataType: "jsonp",
+                    data: "",
+                    url: "https://script.google.com/macros/s/AKfycbx_YQlhN4kdI8bqFPZbhTYVCJJhUjXSowbk7DJrdWUU8cY51uz1U9PwXVtmxsU54Q6YzQ/exec" + ("?prefix=anscallback&numdoc=" + program + ""),
+                    success: function(a) {}
+                })
+            });
+   });
+        //]]>
+      </script>
+</head>
+<body>
+	<div class="container">
+	<img class='header-logo' src='https://felipe-calvo.github.io/static/scrd/sistema-acp.png' alt='SDACP'/>
+	<div class='welcome'>
+	A través de este aplicativo los consejeros del Sistema Distrital de Arte, Cultura y Patrimonio podrán consultar su estado de registro para recibir el apoyo de movilidad.<br>
+	<br/>
+		<b>Ingrese su número de documento sin puntos ni comas</b>: <input id='numdoc' type='text' placeholder='Número de documento' value='' size='50' /><br />
+<br />
+<input id='cons' type='button' value='Consultar'/><br />
+<br />
+<div id='consulta'></div>
+		<br/>
+		
+	</div>
+</body>
+</html>
