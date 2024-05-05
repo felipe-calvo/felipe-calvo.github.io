@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tablero de Control - Consejos de Cultura (SDACP)</title>
+	<link href='https://fonts.googleapis.com/css?family=Source%20Sans%20Pro' rel='stylesheet'/>
+	<style type="text/css">
+		body {
+			font-family: 'Source Sans Pro', Helvetica, Arial;
+			background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+			background-size: 400% 400%;
+			animation: gradient 15s ease infinite;
+			height: 100vh;
+		}
+		@keyframes gradient {
+			0% {
+				background-position: 0% 50%;
+			}
+			50% {
+				background-position: 100% 50%;
+			}
+			100% {
+				background-position: 0% 50%;
+			}
+		}
+		.container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			/* background-color: #f5f5f5; */
+		}
+		.header-logo {
+			margin: 20px auto 10px;
+			width: 95%;
+			max-width: 800px;
+		}
+		.welcome {
+			font-size: 18px;
+			margin: 20px 0;
+			text-align: center;
+			width: 90%;
+			max-width: 900px;
+			border: 3px dashed #455EB5;
+			padding: 20px;
+			text-align: justify;
+			background-color: rgba(255, 255, 255, 0.7);
+		}
+		.btn {
+			padding: 10px;
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			border-radius: 5px;
+			font-size: 16px;
+			cursor: pointer;
+			margin:15px;
+		}
+		.hidden {
+			display: none;
+		}
+		.boton {
+		  background-image: linear-gradient(92.88deg, #455EB5 9.16%, #5643CC 43.89%, #673FD7 64.72%);
+		  border-radius: 8px;
+		  border-style: none;
+		  box-sizing: border-box;
+		  color: #FFFFFF;
+		  cursor: pointer;
+		  flex-shrink: 0;
+		  font-family: 'Source Sans Pro', Helvetica, Arial;
+		  font-size: 16px;
+		  line-height: 4rem;
+		  font-weight: 500;
+		  height: 4rem;
+		  padding: 0 1.6rem;
+		  text-align: center;
+		  text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
+		  transition: all .5s;
+		  user-select: none;
+		  -webkit-user-select: none;
+		  touch-action: manipulation;
+		  width:100%;
+		}
+
+		.boton:hover {
+		  box-shadow: rgba(80, 63, 205, 0.5) 0 1px 30px;
+		  transition-duration: .1s;
+		}
+
+		@media (min-width: 768px) {
+		  .boton {
+			padding: 0 2.6rem;
+		  }
+		}
+		.inline {
+			display: inline-block !important;
+		}
+		footer {
+		  position: fixed;
+		  left:0;
+		  bottom: 0;
+		  width: 100%;
+		  text-align: center;
+		  z-index:0;
+		}
+		.footer-img {
+			width:100%;
+			 /* max-width: 900px; */
+			margin-bottom: -5px;
+		}
+		.footer-clear {
+			height:50px;
+		}
+		.tabla-sistema {
+			width:90%;
+			margin: 10px auto;
+			text-align: center;
+			z-index:1;
+		}
+		.cifra-redonda {
+			width:100px;
+			height:100px;
+			border-radius:50px;
+			background-color: #633d7d;
+			margin: 0 auto;
+			line-height: 100px;
+			font-size: 32px;
+			font-weight: 900;
+			color: white;
+		}
+		.desc {
+			padding-bottom:20px;
+			font-weight:900;
+		}
+		.txt-flotante-100 {
+			text-align:center;
+			font-size: 24px;
+			color: white;
+			margin: 20px auto;
+		}
+		.consulta-home {
+			width:50%;
+			margin:30px auto;
+			cursor: pointer;
+		}
+		.default-2, .default-3, .default-4{
+			display: none;
+			max-width: 600px;
+		}
+		.baldosa {
+			width:200px;
+			height:200px;
+			border-radius:4px;
+			background-color: #633d7d;
+			margin: 0 auto;
+			line-height: 200px;
+			font-size: 32px;
+			font-weight: 900;
+			color: white;
+			cursor: pointer;
+		}
+		.consultar-action {
+			/* display: none; */
+		}
+	</style>
+<script src='https://www.google.com/jsapi'></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+	<script type='text/javascript'>
+	//<![CDATA[
+	// Clic en consulta de consejos
+  $(document).ready(function() {
+    $(".consulta-home").click(function() {
+      $(".default-1").fadeOut(600, function() {
+        $(this).hide(); // Ensure element is hidden after fade out
+        $(".default-2").fadeIn(600);
+      });
+    });
+	// Clic en locales
+    $(".btn-locales").click(function() {
+      $(".default-2").fadeOut(600, function() {
+        $(".default-2").hide(); // Ensure element is hidden after fade out
+        $(".default-3").fadeIn(600);
+      });
+    });
+	// Clic en distritales
+    $(".btn-distritales").click(function() {
+      $(".default-2").fadeOut(600, function() {
+        $(".default-2").hide(); // Ensure element is hidden after fade out
+        $(".default-4").fadeIn(600);
+      });
+    });
+  });
+	
+	//--><!]]>
+	</script>
+</head>
+<body>
+	<div class="container">
+	<img class='header-logo' src='logo-sdacp-alta.png' alt='SDACP'/>
+	<div class='welcome default-1'>
+	El <b>Sistema Distrital de Arte, Cultura y Patrimonio (SDACP)</b> es un mecanismo de participación que invita a todos los bogotanos y las bogotanas a asumir el compromiso de formar parte del proceso de definición de los asuntos culturales, de crear iniciativas para el sector, de fortalecer el vínculo entre la institucionalidad y la ciudadanía, de aunar esfuerzos colectivos y de consolidar su incidencia en las decisiones públicas de la cultura, el arte y el patrimonio en todo el Distrito. <br>
+	</div>
+	<table class='default-1 tabla-sistema'>
+		<tr>
+			<td><div id='' class='cifra-redonda'>XX</div></td>
+			<td><div id='' class='cifra-redonda'>XX</div></td>
+			<td><div id='' class='cifra-redonda'>XX</div></td>
+		</tr>
+		<tr>
+			<td><div id='' class='desc'>Instancias de participación</div></td>
+			<td><div id='' class='desc'>Consejeros locales</div></td>
+			<td><div id='' class='desc'>Consejeros distritales</div></td>
+		</tr>
+		<tr>
+			<td><div id='' class='cifra-redonda'>XX</div></td>
+			<td><div id='' class='cifra-redonda'>XX</div></td>
+			<td><div id='' class='cifra-redonda'>XX</div></td>
+		</tr>
+		<tr>
+			<td><div id='' class='desc'>Participantes de mesas temáticas</div></td>
+			<td><div id='' class='desc'>Total de participantes</div></td>
+			<td><div id='' class='desc'>Total de sesiones en la vigencia</div></td>
+		</tr>
+		<tr>
+			<td colspan='3'>
+				<div class='boton consulta-home'>Consulta por consejos</div>
+			</td>
+		</tr>
+	</table>
+	
+	<table class='default-2 tabla-sistema'>
+		<tr>
+			<td colspan='2'>
+				<div class='txt-flotante-100'>Seleccione qué tipos de consejos desea consultar:</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div class='baldosa btn-locales'>Locales</div>
+			</td>
+			<td>
+				<div class='baldosa btn-distritales'>Distritales</div>
+			</td>
+		</tr>
+	</table>
+	
+	<table class='default-3 tabla-sistema'>
+		<tr>
+			<td colspan='2'>
+				<div class='txt-flotante-100'>Consulta de Consejos Local de Arte, Cultura y Patrimonio (CLACP):</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan='2'>
+				<select id='seleccionadorlocal'>
+					<option selected="selected" value="s">Seleccione...</option>
+					<option value="localidad1">Usaquén</option>
+					<option value="localidad2">Ciudad veneca</option>
+					<option value="localidad3">Santa Fe</option>
+					<option value="localidad4">San Cristóbal</option>
+					<option value="localidad5">Usme</option>
+					<option value="localidad6">Tunjuelitas</option>
+					<option value="localidad7">Bosa</option>
+					<option value="localidad8">Kennedy</option>
+					<option value="localidad9">Fontibón</option>
+					<option value="localidad10">Engativá</option>
+					<option value="localidad11">Suba</option>
+					<option value="localidad12">Barrios Unidos</option>
+					<option value="localidad13">Teusaquillo</option>
+					<option value="localidad14">Los Mártires</option>
+					<option value="localidad15">Antonio Nariño</option>
+					<option value="localidad16">Puente Aranda</option>
+					<option value="localidad17">La Candelaria</option>
+					<option value="localidad18">Rafael Uribe Uribe</option>
+					<option value="localidad19">Ciudad Bolívar</option>
+					<option value="localidad20">Sumapaz</option>
+				</select>
+			</td>
+		</tr>
+		<tr class='consultar-action'>
+			<td colspan='2'><button class="btn" type="submit">Consultar</button>
+			</td>
+		</tr>
+	</table>
+
+	<table class='default-4 tabla-sistema'>
+		<tr>
+			<td colspan='2'>
+				<div class='txt-flotante-100'>Consulta de Consejos Local de Arte, Cultura y Patrimonio (CLACP):</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan='2'>
+				<select id='seleccionadordistrital'>
+					<option selected="selected" value="s">Seleccione...</option>
+					<option value="cdacp">Consejo Distrital de Arte, Cultura y Patrimonio</option>
+					<option value="ccal">Consejo de Cultura para Asuntos Locales</option>
+					<option value="artes">Consejo Distrital de las Artes</option>
+					<option value="dramatico">Consejo Distrital de Arte Dramático</option>
+					<option value="musica">Consejo Distrital de Música</option>
+					<option value="plasticas">Consejo Distrital de Artes Plásticas y Visuales</option>
+					<option value="audiovisuales">Consejo Distrital de Audiovisuales</option>
+					<option value="danza">Consejo Distrital de Danza</option>
+					<option value="literatura">Consejo Distrital de Literatura</option>
+					<option value="poblacional">Consejo de Cultura Poblacional</option>
+					<option value="etnicos">Consejo de Cultura de Grupos Étnicos</option>
+					<option value="etarios">Consejo de Cultura de Grupos Etarios</option>
+					<option value="sociales">Consejo de Cultura de Sectores Sociales</option>
+					<option value="casas">Consejo Distrital de Casas de Cultura</option>
+					<option value="infraestructura">Consejo Distrital de Infraestructura</option>
+					<option value="patrimonio">Consejo Distrital de Patrimonio Cultural</option>
+				</select>
+			</td>
+		</tr>
+		<tr class='consultar-action'>
+			<td colspan='2'><button class="btn" type="submit">Consultar</button>
+			</td>
+		</tr>
+	</table>
+
+		<div class='footer-clear'></div>
+		<footer>
+			<img class='footer-img' src='fondo-bogota-morado.png' />
+		</footer>
+	</div>
+</body>
+</html>
