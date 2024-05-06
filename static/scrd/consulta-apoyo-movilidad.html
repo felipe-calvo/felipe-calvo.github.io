@@ -153,7 +153,7 @@ h4 {margin:0;background-color:#000;color:#fff;font-size:24px;text-align:center;p
                 "" == program ? $("#consulta").html("<span class='error-msg'>Ingrese primero el documento</span>") : $.ajax({
                     dataType: "jsonp",
                     data: "",
-                    url: "https://script.google.com/macros/s/AKfycbx_YQlhN4kdI8bqFPZbhTYVCJJhUjXSowbk7DJrdWUU8cY51uz1U9PwXVtmxsU54Q6YzQ/exec" + ("?prefix=anscallback&numdoc=" + program + ""),
+                    url: "https://script.google.com/a/scrd.gov.co/macros/s/AKfycbx_YQlhN4kdI8bqFPZbhTYVCJJhUjXSowbk7DJrdWUU8cY51uz1U9PwXVtmxsU54Q6YzQ/exec" + ("?prefix=anscallback&numdoc=" + program + ""),
                     success: function(a) {}
                 })
             });
