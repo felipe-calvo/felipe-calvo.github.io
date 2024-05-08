@@ -142,7 +142,7 @@
 			margin:30px auto;
 			cursor: pointer;
 		}
-		.default-2, .default-3, .default-4{
+		.default-2, .default-3, .default-4, .default-5{
 			/*display: none;*/
 			max-width: 600px;
 		}
@@ -161,6 +161,7 @@
 		.consultar-action {
 			/* display: none; */
 		}
+		.tablagris{font-size:16px;background-color:#EFEFEF;padding:10px;color:#000;border:1px dashed #cdcdcd;margin:20px;width:80%;line-height:32px;margin:0 auto;}
 	</style>
 <script src='https://www.google.com/jsapi'></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
@@ -175,7 +176,30 @@
 			$("#consulta-mesas").html(a[4]);
 			$("#consulta-total").html(a[5]);
 			$("#consulta-sesiones").html(a[6]);
-        }
+    }
+	// Consulta detalle de cada consejo
+	function detalleconsejo(a) {
+		var b = "<h4>"+ a[1] +"</h4><div class='program-info'></div>";
+		$("#consulta").html(b);
+		programinfo = '<table class="tablagris">';
+		programinfo += '<tr><td class="property">Consejeros Electos</td><td class="property-value">'+ a[5] +'</td></tr>';
+		programinfo += '<tr><td class="property">Consejeros Activos</td><td class="property-value">'+ a[6] +'</td></tr>';
+		programinfo += '<tr><td class="property">Consejeros Inactivos</td><td class="property-value">'+ a[7] +'</td></tr>';
+		programinfo += '<tr><td class="property">Sectores Representados</td><td class="property-value">'+ a[8] +'</td></tr>';
+		programinfo += '<tr><td class="property">Sectores Desiertos</td><td class="property-value">'+ a[9] +'</td></tr>';
+		programinfo += '<tr><td class="property">Sesiones en 2023</td><td class="property-value">'+ a[10] +'</td></tr>';
+		programinfo += '<tr><td class="property">Sesiones en 2024</td><td class="property-value">'+ a[11] +'</td></tr>';
+		programinfo += '<tr><td class="property">Total de Sesiones en la Vigencia</td><td class="property-value">'+ a[12] +'</td></tr>';
+		programinfo += '<tr><td class="property">Reglamento Aprobado</td><td class="property-value">'+ a[2] +'</td></tr>';
+		programinfo += '<tr><td class="property">Agenda Participativa Aprobada (2024)</td><td class="property-value">'+ a[3] +'</td></tr>';
+		programinfo += '<tr><td class="property">Secretaria(o) Técnico</td><td class="property-value">'+ a[14] +'</td></tr>';
+		programinfo += '<tr><td class="property">Contacto</td><td class="property-value">'+ a[15] +'</td></tr>';
+		programinfo += '<tr><td class="property">Micrositio Web</td><td class="property-value">'+ a[13] +'</td></tr>';
+		programinfo += "</table>";
+		programinfo += "<br/>";
+		programinfo += "<b class='update-time'>Fecha de actualización</b>: "+ a[4] +"";
+		$(".program-info").prepend(programinfo);
+    }
 	// Clic en consulta de consejos
   $(document).ready(function() {
     // Petición Ajax por defecto
@@ -183,8 +207,30 @@
 		dataType: "jsonp",
 		data: "",
 		url: "https://script.google.com/a/scrd.gov.co/macros/s/AKfycbz7-jgOdhQgz-3xYd2E8sNSCHYs0FQiMmGzV2sOqlrIkEsZfyPgXU-OmjnCpOoCcPd4lA/exec" + ("?prefix=panorama&consejo=" + consejo + ""),
-		success: function(a) {console.log(a)}
+		success: function(a) {}
     });
+	$(".accion-consulta-local").click(function() {
+	consejo = $("#seleccionadorlocal").val();
+	console.log(consejo);
+	  $("#consulta").html('<img src="https://lh3.googleusercontent.com/-A6xlhPOOg_U/U0w-d2E_wXI/AAAAAAAAIqQ/MS7bIR4QpRE/s00/loading-results-unacademia.GIF" border="0" class="no" style="display:block;margin:0 auto;width:128px;height:128px;" />');
+		"" == consejo ? $("#consulta").html("<span class='txt-flotante-100'>Seleccione por favor un consejo para hacer la consulta</span>") : $.ajax({
+			dataType: "jsonp",
+			data: "",
+			url: "https://script.google.com/a/scrd.gov.co/macros/s/AKfycbz7-jgOdhQgz-3xYd2E8sNSCHYs0FQiMmGzV2sOqlrIkEsZfyPgXU-OmjnCpOoCcPd4lA/exec" + ("?prefix=detalleconsejo&consejo=" + consejo + ""),
+			success: function(a) {}
+		})
+	});
+	$(".accion-consulta-distrital").click(function() {
+	consejo = $("#seleccionadordistrital").val();
+	console.log(consejo);
+	  $("#consulta").html('<img src="https://lh3.googleusercontent.com/-A6xlhPOOg_U/U0w-d2E_wXI/AAAAAAAAIqQ/MS7bIR4QpRE/s00/loading-results-unacademia.GIF" border="0" class="no" style="display:block;margin:0 auto;width:128px;height:128px;" />');
+		"" == consejo ? $("#consulta").html("<span class='txt-flotante-100'>Seleccione por favor un consejo para hacer la consulta</span>") : $.ajax({
+			dataType: "jsonp",
+			data: "",
+			url: "https://script.google.com/a/scrd.gov.co/macros/s/AKfycbz7-jgOdhQgz-3xYd2E8sNSCHYs0FQiMmGzV2sOqlrIkEsZfyPgXU-OmjnCpOoCcPd4lA/exec" + ("?prefix=detalleconsejo&consejo=" + consejo + ""),
+			success: function(a) {}
+		})
+	});
 	$(".consulta-home").click(function() {
       $(".default-1").fadeOut(600, function() {
         $(this).hide(); // Ensure element is hidden after fade out
@@ -217,9 +263,9 @@
 	</div>
 	<table class='default-1 tabla-sistema'>
 		<tr>
-			<td><div id='consulta-instancias' class='cifra-redonda'>XX</div></td>
-			<td><div id='consulta-locales' class='cifra-redonda'>XX</div></td>
-			<td><div id='consulta-distritales' class='cifra-redonda'>XX</div></td>
+			<td><div id='consulta-instancias' class='cifra-redonda'><img alt='Cargando' src='https://lh3.googleusercontent.com/-A6xlhPOOg_U/U0w-d2E_wXI/AAAAAAAAIqQ/MS7bIR4QpRE/s32/loading-results-unacademia.GIF' style='padding-top:35px;' /></div></td>
+			<td><div id='consulta-locales' class='cifra-redonda'><img alt='Cargando' src='https://lh3.googleusercontent.com/-A6xlhPOOg_U/U0w-d2E_wXI/AAAAAAAAIqQ/MS7bIR4QpRE/s32/loading-results-unacademia.GIF' style='padding-top:35px;' /></div></td>
+			<td><div id='consulta-distritales' class='cifra-redonda'><img alt='Cargando' src='https://lh3.googleusercontent.com/-A6xlhPOOg_U/U0w-d2E_wXI/AAAAAAAAIqQ/MS7bIR4QpRE/s32/loading-results-unacademia.GIF' style='padding-top:35px;' /></div></td>
 		</tr>
 		<tr>
 			<td><div id='' class='desc'>Instancias de participación</div></td>
@@ -227,9 +273,9 @@
 			<td><div id='' class='desc'>Consejeros distritales</div></td>
 		</tr>
 		<tr>
-			<td><div id='consulta-mesas' class='cifra-redonda'>XX</div></td>
-			<td><div id='consulta-total' class='cifra-redonda'>XX</div></td>
-			<td><div id='consulta-sesiones' class='cifra-redonda'>XX</div></td>
+			<td><div id='consulta-mesas' class='cifra-redonda'><img alt='Cargando' src='https://lh3.googleusercontent.com/-A6xlhPOOg_U/U0w-d2E_wXI/AAAAAAAAIqQ/MS7bIR4QpRE/s32/loading-results-unacademia.GIF' style='padding-top:35px;' /></div></td>
+			<td><div id='consulta-total' class='cifra-redonda'><img alt='Cargando' src='https://lh3.googleusercontent.com/-A6xlhPOOg_U/U0w-d2E_wXI/AAAAAAAAIqQ/MS7bIR4QpRE/s32/loading-results-unacademia.GIF' style='padding-top:35px;' /></div></td>
+			<td><div id='consulta-sesiones' class='cifra-redonda'><img alt='Cargando' src='https://lh3.googleusercontent.com/-A6xlhPOOg_U/U0w-d2E_wXI/AAAAAAAAIqQ/MS7bIR4QpRE/s32/loading-results-unacademia.GIF' style='padding-top:35px;' /></div></td>
 		</tr>
 		<tr>
 			<td><div id='' class='desc'>Participantes de mesas temáticas</div></td>
@@ -293,7 +339,7 @@
 			</td>
 		</tr>
 		<tr class='consultar-action'>
-			<td colspan='2'><button class="btn" type="submit">Consultar</button>
+			<td colspan='2'><button class="btn accion-consulta-local" type="submit">Consultar</button>
 			</td>
 		</tr>
 	</table>
@@ -328,10 +374,14 @@
 			</td>
 		</tr>
 		<tr class='consultar-action'>
-			<td colspan='2'><button class="btn" type="submit">Consultar</button>
+			<td colspan='2'><button class="btn accion-consulta-distrital" type="submit">Consultar</button>
 			</td>
 		</tr>
 	</table>
+	
+	<br />
+	<div id='consulta'></div>
+	<br/>
 
 		<div class='footer-clear'></div>
 		<footer>
