@@ -6,17 +6,22 @@
 	<style type="text/css">
 		body {
 			font-family: 'Source Sans Pro', Helvetica, Arial;
+			background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+			background-size: 400% 400%;
+			animation: gradient 20s ease infinite;
+			height: 100vh;
 		}
 		.container {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
 			justify-content: center;
-			background-color: #f5f5f5;
+			/* background-color: #f5f5f5; */
 		}
 		.header-logo {
-			margin: 20px 0;
-			width: 600px;
+			margin: 20px auto 10px;
+			width: 95%;
+			max-width: 800px;
 		}
 		.welcome {
 			font-size: 18px;
@@ -163,7 +168,7 @@ h4 {margin:0;background-color:#000;color:#fff;font-size:24px;text-align:center;p
 </head>
 <body>
 	<div class="container">
-	<img class='header-logo' src='https://felipe-calvo.github.io/static/scrd/sistema-acp.png' alt='SDACP'/>
+	<img class='header-logo' src='logo-sdacp-alta.png' alt='SDACP'/>
 	<div class='welcome'>
 	A través de este aplicativo los consejeros del Sistema Distrital de Arte, Cultura y Patrimonio podrán consultar su estado de registro para recibir el apoyo de movilidad.<br>
 	<br/>
