@@ -161,7 +161,7 @@
 		.consultar-action {
 			/* display: none; */
 		}
-		.tablagris{font-size:16px;background-color:#EFEFEF;padding:10px;color:#000;border:1px dashed #cdcdcd;margin:20px;width:80%;line-height:32px;margin:0 auto;}
+		.tablagris{font-size:16px;background-color:#EFEFEF;padding:12px;color:#000;border:1px dashed #cdcdcd;margin:20px;line-height:32px;}
 	</style>
 <script src='https://www.google.com/jsapi'></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
@@ -181,7 +181,7 @@
 	function detalleconsejo(a) {
 		var b = "<h4>"+ a[1] +"</h4><div class='program-info'></div>";
 		$("#consulta").html(b);
-		programinfo = '<table class="tablagris">';
+		programinfo = '<table class="tablagris tabla-sistema">';
 		programinfo += '<tr><td class="property">Consejeros Electos</td><td class="property-value">'+ a[5] +'</td></tr>';
 		programinfo += '<tr><td class="property">Consejeros Activos</td><td class="property-value">'+ a[6] +'</td></tr>';
 		programinfo += '<tr><td class="property">Consejeros Inactivos</td><td class="property-value">'+ a[7] +'</td></tr>';
