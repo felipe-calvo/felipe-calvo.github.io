@@ -44,6 +44,7 @@
 			padding: 20px;
 			text-align: justify;
 			background-color: rgba(255, 255, 255, 0.7);
+			z-index:1;
 		}
 		.btn {
 			padding: 10px;
@@ -162,6 +163,15 @@
 			/* display: none; */
 		}
 		.tablagris{font-size:16px;background-color:#EFEFEF;padding:12px;color:#000;border:1px dashed #cdcdcd;margin:20px;line-height:32px;}
+		.tablagris tr {outline: 1px dashed #cdcdcd;}
+		td.property {
+			text-align: right;
+			width: 50%;
+			font-weight: 900;
+		}
+		td.property-value {
+			text-align: center;
+		}
 	</style>
 <script src='https://www.google.com/jsapi'></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
@@ -179,10 +189,10 @@
     }
 	// Consulta detalle de cada consejo
 	function detalleconsejo(a) {
-		var b = "<h4>"+ a[1] +"</h4><div class='program-info'></div>";
+		var b = "<h4 style='text-align:center;text-transform: uppercase;font-size: 24px;'>"+ a[1] +"</h4><div class='program-info'></div>";
 		$("#consulta").html(b);
 		programinfo = '<table class="tablagris tabla-sistema">';
-		programinfo += '<tr><td class="property">Consejeros Electos</td><td class="property-value">'+ a[5] +'</td></tr>';
+		programinfo += '<tr><td class="property">Consejeros Electos 2023-2027</td><td class="property-value">'+ a[5] +'</td></tr>';
 		programinfo += '<tr><td class="property">Consejeros Activos</td><td class="property-value">'+ a[6] +'</td></tr>';
 		programinfo += '<tr><td class="property">Consejeros Inactivos</td><td class="property-value">'+ a[7] +'</td></tr>';
 		programinfo += '<tr><td class="property">Sectores Representados</td><td class="property-value">'+ a[8] +'</td></tr>';
@@ -191,7 +201,7 @@
 		programinfo += '<tr><td class="property">Sesiones en 2024</td><td class="property-value">'+ a[11] +'</td></tr>';
 		programinfo += '<tr><td class="property">Total de Sesiones en la Vigencia</td><td class="property-value">'+ a[12] +'</td></tr>';
 		programinfo += '<tr><td class="property">Reglamento Aprobado</td><td class="property-value">'+ a[2] +'</td></tr>';
-		programinfo += '<tr><td class="property">Agenda Participativa Aprobada (2024)</td><td class="property-value">'+ a[3] +'</td></tr>';
+		programinfo += '<tr><td class="property">Agenda Participativa Anual (2024)</td><td class="property-value">'+ a[3] +'</td></tr>';
 		programinfo += '<tr><td class="property">Secretaria(o) Técnico</td><td class="property-value">'+ a[14] +'</td></tr>';
 		programinfo += '<tr><td class="property">Contacto</td><td class="property-value">'+ a[15] +'</td></tr>';
 		programinfo += '<tr><td class="property">Micrositio Web</td><td class="property-value">'+ a[13] +'</td></tr>';
@@ -380,7 +390,7 @@
 	</table>
 	
 	<br />
-	<div id='consulta'></div>
+	<div id='consulta' class='welcome'></div>
 	<br/>
 
 		<div class='footer-clear'></div>
