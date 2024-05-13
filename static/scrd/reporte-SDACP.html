@@ -152,7 +152,7 @@
 			display: none;
 		}
 		.default-2, .default-3, .default-4, .default-5 {
-			/*display: none;*/
+			display: none;
 			max-width: 600px;
 		}
 		.baldosa {
@@ -187,7 +187,8 @@
 		.chart-container {
 			width: 90%;
 			height: 360px;
-			padding: 15px;
+			background-color: white;
+			margin:15px 0;
 		}
 	</style>
 <script src='https://www.google.com/jsapi'></script>
@@ -264,12 +265,12 @@
 		programinfo += "<br/>";
 		programinfo += "<b class='update-time'>Fuente:</b> SCRD-DALP.<br/>";
 		programinfo += "<b class='update-time'>Fecha de actualización</b>: "+ a[4] +".<br/><br/>";
-		programinfo += "<div style='text-align:center;'><button id='accion-home' class='btn' type='submit'>Volver al inicio</button></div>";
+		programinfo += "<div style='text-align:center;'><button class='btn accion-home' type='submit'>Volver al inicio</button></div>";
 		$(".program-info").prepend(programinfo);
-		$(document).on("click", "#accion-home", function(){
-		  console.log("Render");
+		$(document).on("click", ".accion-home", function(){
 		  $(".default-3").hide();
 		  $(".default-4").hide();
+		  $(".default-5").hide();
 		  $("#consulta").hide();
 		  $(".default-1").fadeIn(600);
 		});
@@ -334,51 +335,106 @@
       $(".default-1").fadeOut(600, function() {
         $(this).hide(); // Ensure element is hidden after fade out
 
-// Sexo
-var options_sexo = {
-	animationEnabled: true,
-	theme: "light2",
-	title: {
-		text: "Sexo",
-		fontFamily: "Source Sans Pro"
-	},
-	data: [{
-		type: "doughnut",
-		fontFamily: "Source Sans Pro",
-		innerRadius: "40%",
-		showInLegend: true,
-		legendText: "{label}",
-		indexLabel: "{label}: #percent%",
-		dataPoints: [
-			{ label: "Hombres", y: stats_hombres, indexLabelFontFamily: "Source Sans Pro" },
-			{ label: "Mujeres", y: stats_mujeres, indexLabelFontFamily: "Source Sans Pro" }
-		]
-	}]
-};
-$("#chart-sexo").CanvasJSChart(options_sexo);
+	// Sexo
+	var options_sexo = {
+		animationEnabled: true,
+		theme: "light2",
+		title: {
+			text: "Sexo",
+			fontFamily: "Source Sans Pro",
+			fontWeight: "bold"
+		},
+		data: [{
+			type: "doughnut",
+			fontFamily: "Source Sans Pro",
+			innerRadius: "40%",
+			showInLegend: true,
+			legendText: "{label}",
+			indexLabel: "{label}: #percent%",
+			dataPoints: [
+				{ label: "Hombres", y: stats_hombres, indexLabelFontFamily: "Source Sans Pro" },
+				{ label: "Mujeres", y: stats_mujeres, indexLabelFontFamily: "Source Sans Pro" }
+			]
+		}]
+	};
+	$("#chart-sexo").CanvasJSChart(options_sexo);
 
-// Rango etario
-var options_etario = {
-	theme: "light1",
-	title: {
-		text: "Rango Etario",
-	    fontFamily: "Source Sans Pro"
-	},
-	data: [              
-	{
-		// Change type to "doughnut", "line", "splineArea", etc.
-		type: "column",
-		fontFamily: "Source Sans Pro",
-		dataPoints: [
-			{ label: "Niñas y niños",  y: stats_nino, indexLabelFontFamily: "Source Sans Pro"  },
-			{ label: "Jóvenes", y: stats_joven, indexLabelFontFamily: "Source Sans Pro"  },
-			{ label: "Adultos", y: stats_adulto, indexLabelFontFamily: "Source Sans Pro" },
-			{ label: "Personas Mayores",  y: stats_mayor, indexLabelFontFamily: "Source Sans Pro"  }
+	// Rango etario
+	var options_etario = {
+		theme: "light1",
+		title: {
+			text: "Rango Etario",
+			fontFamily: "Source Sans Pro",
+			fontWeight: "bold"
+		},
+		data: [              
+		{
+			// Change type to "doughnut", "line", "splineArea", etc.
+			type: "column",
+			fontFamily: "Source Sans Pro",
+			dataPoints: [
+				{ label: "Niñas y niños",  y: stats_nino, indexLabelFontFamily: "Source Sans Pro"  },
+				{ label: "Jóvenes", y: stats_joven, indexLabelFontFamily: "Source Sans Pro"  },
+				{ label: "Adultos", y: stats_adulto, indexLabelFontFamily: "Source Sans Pro" },
+				{ label: "Personas Mayores",  y: stats_mayor, indexLabelFontFamily: "Source Sans Pro"  }
+			]
+		}
 		]
-	}
-	]
-};
-$("#chart-etario").CanvasJSChart(options_etario);
+	};
+	$("#chart-etario").CanvasJSChart(options_etario);
+
+	// Ocupación
+	var options_ocupacion = {
+		animationEnabled: true,
+		theme: "light2",
+		title: {
+			text: "Ocupación",
+			fontFamily: "Source Sans Pro",
+			fontWeight: "bold"
+		},
+		data: [{
+			type: "pie",
+			fontFamily: "Source Sans Pro",
+			startAngle: 45,
+			showInLegend: true,
+			legendText: "{label}",
+			indexLabel: "{label}: #percent%",
+			yValueFormatString:"#,##0.#"%"",
+			dataPoints: [
+				{ label: "Estudiante", y: stats_oficio_estudiante, indexLabelFontFamily: "Source Sans Pro" },
+				{ label: "Empleado", y: stats_oficio_empleado, indexLabelFontFamily: "Source Sans Pro" },
+				{ label: "Independiente", y: stats_oficio_independiente, indexLabelFontFamily: "Source Sans Pro" },
+				{ label: "Desempleado", y: stats_oficio_desempleado, indexLabelFontFamily: "Source Sans Pro" },
+				{ label: "Ninguna", y: stats_oficio_ninguno, indexLabelFontFamily: "Source Sans Pro" }
+			]
+		}]
+	};
+	$("#chart-ocupacion").CanvasJSChart(options_ocupacion);
+
+	// Población
+	var options_pob = {
+		animationEnabled: true,
+		theme: "light1",
+		title: {
+			text: "Poblaciones Étnicas",
+			fontFamily: "Source Sans Pro",
+			fontWeight: "bold"
+		},
+		data: [{
+			type: "doughnut",
+			fontFamily: "Source Sans Pro",
+			innerRadius: "40%",
+			showInLegend: true,
+			legendText: "{label}",
+			indexLabel: "{label}: #percent%",
+			dataPoints: [
+				{ label: "Ninguna", y: stats_pob_ninguna, indexLabelFontFamily: "Source Sans Pro" },
+				{ label: "Indígenas", y: stats_pob_indigena, indexLabelFontFamily: "Source Sans Pro" },
+				{ label: "Afro, Raizal o Palenqueros", y: stats_pob_afros, indexLabelFontFamily: "Source Sans Pro" }
+			]
+		}]
+	};
+	$("#chart-poblacion").CanvasJSChart(options_pob);
 
 		// Mostrar el elemento
 		$(".default-5").fadeIn(600);
@@ -550,6 +606,11 @@ $("#chart-etario").CanvasJSChart(options_etario);
 			<td>
 				<div id='chart-poblacion' class='chart-container'>
 				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div style='text-align:center;'><button class='btn accion-home' type='submit'>Volver al inicio</button></div>
 			</td>
 		</tr>
 	</table>
