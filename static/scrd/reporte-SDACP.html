@@ -140,10 +140,10 @@
 		}
 		.consulta-home {
 			width:50%;
-			margin:30px auto;
+			margin:10px auto;
 			cursor: pointer;
 		}
-		.default-2, .default-3, .default-4, .default-5{
+		.default-2, .default-3, .default-4, .default-5, #consulta {
 			/*display: none;*/
 			max-width: 600px;
 		}
@@ -170,11 +170,16 @@
 			font-weight: 900;
 		}
 		td.property-value {
-			text-align: center;
+			text-align: left;
+			padding-left: 30px;
+		}
+		a.enlace, a.enlace:visited {
+			color: #548DD4;
 		}
 	</style>
 <script src='https://www.google.com/jsapi'></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="https://felipe-calvo.github.io/static/scrd/jquery.canvasjs.min.js"></script>
 	<script type='text/javascript'>
 	//<![CDATA[
 	// Función cargada por defecto al cargar la página
@@ -190,24 +195,34 @@
 	// Consulta detalle de cada consejo
 	function detalleconsejo(a) {
 		var b = "<h4 style='text-align:center;text-transform: uppercase;font-size: 24px;'>"+ a[1] +"</h4><div class='program-info'></div>";
+		representados = a[8];
+		representados = representados.replace(/,/g,'<br>&#183; ');
+		representados = representados.replace(/<br>/,'');
+		desiertos = a[9];
+		desiertos = desiertos.replace(/,/g,'<br>&#183; ');
+		desiertos = desiertos.replace(/<br>/,'');
+		contacto = "<a class='enlace' href='mailto:"+ a[15] +"' target='_blank'>"+ a[15] +"</a>";
+		web = "<a class='enlace' href="+ a[13] +" target='_blank'>"+ a[13] +"</a>";
 		$("#consulta").html(b);
 		programinfo = '<table class="tablagris tabla-sistema">';
-		programinfo += '<tr><td class="property">Consejeros Electos 2023-2027</td><td class="property-value">'+ a[5] +'</td></tr>';
-		programinfo += '<tr><td class="property">Consejeros Activos</td><td class="property-value">'+ a[6] +'</td></tr>';
-		programinfo += '<tr><td class="property">Consejeros Inactivos</td><td class="property-value">'+ a[7] +'</td></tr>';
-		programinfo += '<tr><td class="property">Sectores Representados</td><td class="property-value">'+ a[8] +'</td></tr>';
-		programinfo += '<tr><td class="property">Sectores Desiertos</td><td class="property-value">'+ a[9] +'</td></tr>';
+		programinfo += '<tr><td class="property">Consejeros(as) Electos 2023-2027</td><td class="property-value">'+ a[5] +'</td></tr>';
+		programinfo += '<tr><td class="property">Consejeros(as) Activos</td><td class="property-value">'+ a[6] +'</td></tr>';
+		programinfo += '<tr><td class="property">Consejeros(as) Inactivos</td><td class="property-value">'+ a[7] +'</td></tr>';
+		programinfo += '<tr><td class="property">Sectores Representados</td><td class="property-value">'+ representados +'</td></tr>';
+		programinfo += '<tr><td class="property">Sectores Desiertos</td><td class="property-value">'+ desiertos +'</td></tr>';
 		programinfo += '<tr><td class="property">Sesiones en 2023</td><td class="property-value">'+ a[10] +'</td></tr>';
 		programinfo += '<tr><td class="property">Sesiones en 2024</td><td class="property-value">'+ a[11] +'</td></tr>';
 		programinfo += '<tr><td class="property">Total de Sesiones en la Vigencia</td><td class="property-value">'+ a[12] +'</td></tr>';
+		programinfo += '<tr><td class="property">Porcentaje Medio de Asistencia</td><td class="property-value">'+ a[16] +'</td></tr>';
 		programinfo += '<tr><td class="property">Reglamento Aprobado</td><td class="property-value">'+ a[2] +'</td></tr>';
 		programinfo += '<tr><td class="property">Agenda Participativa Anual (2024)</td><td class="property-value">'+ a[3] +'</td></tr>';
 		programinfo += '<tr><td class="property">Secretaria(o) Técnico</td><td class="property-value">'+ a[14] +'</td></tr>';
-		programinfo += '<tr><td class="property">Contacto</td><td class="property-value">'+ a[15] +'</td></tr>';
-		programinfo += '<tr><td class="property">Micrositio Web</td><td class="property-value">'+ a[13] +'</td></tr>';
+		programinfo += '<tr><td class="property">Contacto</td><td class="property-value">'+ contacto +'</td></tr>';
+		programinfo += '<tr><td class="property">Micrositio Web</td><td class="property-value">'+ web +'</td></tr>';
 		programinfo += "</table>";
 		programinfo += "<br/>";
-		programinfo += "<b class='update-time'>Fecha de actualización</b>: "+ a[4] +"";
+		programinfo += "<b class='update-time'>Fuente:</b> SCRD-DALP.<br/>";
+		programinfo += "<b class='update-time'>Fecha de actualización</b>: "+ a[4] +".";
 		$(".program-info").prepend(programinfo);
     }
 	// Clic en consulta de consejos
@@ -294,7 +309,12 @@
 		</tr>
 		<tr>
 			<td colspan='3'>
-				<div class='boton consulta-home'>Consulta por consejos</div>
+				<div class='boton consulta-home'>Consulta por Consejos</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan='3'>
+				<div class='boton consulta-home'>Caracterización Sociodemográfica</div>
 			</td>
 		</tr>
 	</table>
