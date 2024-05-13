@@ -238,10 +238,10 @@
 	function detalleconsejo(a) {
 		var b = "<h4 style='text-align:center;text-transform: uppercase;font-size: 24px;'>"+ a[1] +"</h4><div class='program-info'></div>";
 		representados = a[8];
-		representados = representados.replace(/,/g,'<br>&#183; ');
+		representados = representados.replace(/\*/g,'<br>&#183; ');
 		representados = representados.replace(/<br>/,'');
 		desiertos = a[9];
-		desiertos = desiertos.replace(/,/g,'<br>&#183; ');
+		desiertos = desiertos.replace(/\*/g,'<br>&#183; ');
 		desiertos = desiertos.replace(/<br>/,'');
 		contacto = "<a class='enlace' href='mailto:"+ a[15] +"' target='_blank'>"+ a[15] +"</a>";
 		web = "<a class='enlace' href="+ a[13] +" target='_blank'>"+ a[13] +"</a>";
