@@ -7,7 +7,7 @@
 		body {
 			font-family: 'Source Sans Pro', Helvetica, Arial;
 			background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-			background-size: 400% 400%;
+			background-size: 1000% 1000%;
 			animation: gradient 20s ease infinite;
 			height: 100vh;
 		}
@@ -109,7 +109,7 @@
 			margin-bottom: -5px;
 		}
 		.footer-clear {
-			height:50px;
+			height:70px;
 		}
 		.tabla-sistema {
 			width:90%;
@@ -143,7 +143,15 @@
 			margin:10px auto;
 			cursor: pointer;
 		}
-		.default-2, .default-3, .default-4, .default-5, #consulta {
+		.consulta-stats {
+			width:50%;
+			margin:10px auto;
+			cursor: pointer;
+		}
+		#consulta {
+			display: none;
+		}
+		.default-2, .default-3, .default-4, .default-5 {
 			/*display: none;*/
 			max-width: 600px;
 		}
@@ -176,6 +184,10 @@
 		a.enlace, a.enlace:visited {
 			color: #548DD4;
 		}
+		.chart-container {
+			width: 90%;
+			height: 360px;
+		}
 	</style>
 <script src='https://www.google.com/jsapi'></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
@@ -184,6 +196,20 @@
 	//<![CDATA[
 	// Función cargada por defecto al cargar la página
 	var consejo = "defecto";
+	stats_hombres = 0;
+	stats_mujeres = 0;
+	stats_nino = 0;
+	stats_joven = 0;
+	stats_adulto = 0;
+	stats_mayor = 0;
+	stats_pob_ninguna = 0;
+	stats_pob_indigena = 0;
+	stats_pob_afros = 0; // Incluye raizal y palenqueros
+	stats_oficio_ninguno = 0;
+	stats_oficio_estudiante = 0;
+	stats_oficio_empleado = 0;
+	stats_oficio_independiente = 0;
+	stats_oficio_desempleado = 0;
 	function panorama(a) {
             $("#consulta-instancias").html(a[1]);
 			$("#consulta-locales").html(a[2]);
@@ -191,6 +217,20 @@
 			$("#consulta-mesas").html(a[4]);
 			$("#consulta-total").html(a[5]);
 			$("#consulta-sesiones").html(a[6]);
+			stats_hombres = a[7];
+			stats_mujeres = a[8];
+			stats_nino = a[11];
+			stats_joven = a[12]+a[13];
+			stats_adulto = a[14];
+			stats_mayor = a[15];
+			stats_pob_ninguna = a[16]+a[20];
+			stats_pob_indigena = a[17];
+			stats_pob_afros = a[18]+a[19]+a[21];
+			stats_oficio_ninguno = a[22];
+			stats_oficio_estudiante = a[23];
+			stats_oficio_empleado = a[24];
+			stats_oficio_independiente = a[25];
+			stats_oficio_desempleado = a[26];
     }
 	// Consulta detalle de cada consejo
 	function detalleconsejo(a) {
@@ -222,10 +262,17 @@
 		programinfo += "</table>";
 		programinfo += "<br/>";
 		programinfo += "<b class='update-time'>Fuente:</b> SCRD-DALP.<br/>";
-		programinfo += "<b class='update-time'>Fecha de actualización</b>: "+ a[4] +".";
+		programinfo += "<b class='update-time'>Fecha de actualización</b>: "+ a[4] +".<br/><br/>";
+		programinfo += "<div style='text-align:center;'><button id='accion-home' class='btn' type='submit'>Volver al inicio</button></div>";
 		$(".program-info").prepend(programinfo);
+		$(document).on("click", "#accion-home", function(){
+		  console.log("Render");
+		  $(".default-3").hide();
+		  $(".default-4").hide();
+		  $("#consulta").hide();
+		  $(".default-1").fadeIn(600);
+		});
     }
-	// Clic en consulta de consejos
   $(document).ready(function() {
     // Petición Ajax por defecto
 	$.ajax({
@@ -234,9 +281,11 @@
 		url: "https://script.google.com/a/scrd.gov.co/macros/s/AKfycbz7-jgOdhQgz-3xYd2E8sNSCHYs0FQiMmGzV2sOqlrIkEsZfyPgXU-OmjnCpOoCcPd4lA/exec" + ("?prefix=panorama&consejo=" + consejo + ""),
 		success: function(a) {}
     });
+	// Accion consulta local
 	$(".accion-consulta-local").click(function() {
 	consejo = $("#seleccionadorlocal").val();
 	console.log(consejo);
+	$("#consulta").show();
 	  $("#consulta").html('<img src="https://lh3.googleusercontent.com/-A6xlhPOOg_U/U0w-d2E_wXI/AAAAAAAAIqQ/MS7bIR4QpRE/s00/loading-results-unacademia.GIF" border="0" class="no" style="display:block;margin:0 auto;width:128px;height:128px;" />');
 		"" == consejo ? $("#consulta").html("<span class='txt-flotante-100'>Seleccione por favor un consejo para hacer la consulta</span>") : $.ajax({
 			dataType: "jsonp",
@@ -245,9 +294,11 @@
 			success: function(a) {}
 		})
 	});
+	// Acción consults distrital
 	$(".accion-consulta-distrital").click(function() {
 	consejo = $("#seleccionadordistrital").val();
 	console.log(consejo);
+	$("#consulta").show();
 	  $("#consulta").html('<img src="https://lh3.googleusercontent.com/-A6xlhPOOg_U/U0w-d2E_wXI/AAAAAAAAIqQ/MS7bIR4QpRE/s00/loading-results-unacademia.GIF" border="0" class="no" style="display:block;margin:0 auto;width:128px;height:128px;" />');
 		"" == consejo ? $("#consulta").html("<span class='txt-flotante-100'>Seleccione por favor un consejo para hacer la consulta</span>") : $.ajax({
 			dataType: "jsonp",
@@ -256,6 +307,7 @@
 			success: function(a) {}
 		})
 	});
+	// Clic en consulta por consejos
 	$(".consulta-home").click(function() {
       $(".default-1").fadeOut(600, function() {
         $(this).hide(); // Ensure element is hidden after fade out
@@ -274,6 +326,60 @@
       $(".default-2").fadeOut(600, function() {
         $(".default-2").hide(); // Ensure element is hidden after fade out
         $(".default-4").fadeIn(600);
+      });
+    });
+	// Clic en sociodemográficos
+	$(".consulta-stats").click(function() {
+      $(".default-1").fadeOut(600, function() {
+        $(this).hide(); // Ensure element is hidden after fade out
+
+// Sexo
+var options_sexo = {
+	animationEnabled: true,
+	title: {
+		text: "Sexo",
+		fontFamily: "Source Sans Pro"
+	},
+	data: [{
+		type: "doughnut",
+		fontFamily: "Source Sans Pro",
+		innerRadius: "40%",
+		showInLegend: true,
+		legendText: "{label}",
+		indexLabel: "{label}: #percent%",
+		dataPoints: [
+			{ label: "Hombres", y: stats_hombres, indexLabelFontFamily: "Source Sans Pro" },
+			{ label: "Mujeres", y: stats_mujeres, indexLabelFontFamily: "Source Sans Pro" }
+		]
+	}]
+};
+$("#chart-sexo").CanvasJSChart(options_sexo);
+
+// Rango etario
+var options_etario = {
+	title: {
+		text: "Rango Etario",
+	    fontFamily: "Source Sans Pro"
+	},
+	data: [              
+	{
+		// Change type to "doughnut", "line", "splineArea", etc.
+		type: "column",
+		fontFamily: "Source Sans Pro",
+		dataPoints: [
+			{ label: "Niñas y niños",  y: stats_nino, indexLabelFontFamily: "Source Sans Pro"  },
+			{ label: "Jóvenes", y: stats_joven, indexLabelFontFamily: "Source Sans Pro"  },
+			{ label: "Adultos", y: stats_adulto, indexLabelFontFamily: "Source Sans Pro" },
+			{ label: "Personas Mayores",  y: stats_mayor, indexLabelFontFamily: "Source Sans Pro"  }
+		]
+	}
+	]
+};
+$("#chart-etario").CanvasJSChart(options_etario);
+
+		// Mostrar el elemento
+		$(".default-5").fadeIn(600);
+
       });
     });
   });
@@ -314,7 +420,7 @@
 		</tr>
 		<tr>
 			<td colspan='3'>
-				<div class='boton consulta-home'>Caracterización Sociodemográfica</div>
+				<div class='boton consulta-stats'>Caracterización Sociodemográfica</div>
 			</td>
 		</tr>
 	</table>
@@ -412,6 +518,38 @@
 	<br />
 	<div id='consulta' class='welcome'></div>
 	<br/>
+	
+	<table class='default-5 tabla-sistema'>
+		<tr>
+			<td>
+				<div class='txt-flotante-100'>Caracterización Sociodemográfica del Sistema Distrital de Arte, Cultura y Patrimonio</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div id='chart-sexo' class='chart-container'>		
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div id='chart-etario' class='chart-container'>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div id='chart-ocupacion' class='chart-container'>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div id='chart-poblacion' class='chart-container'>
+				</div>
+			</td>
+		</tr>
+	</table>
 
 		<div class='footer-clear'></div>
 		<footer>
