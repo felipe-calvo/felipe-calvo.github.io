@@ -206,12 +206,22 @@
 	stats_mayor = 0;
 	stats_pob_ninguna = 0;
 	stats_pob_indigena = 0;
-	stats_pob_afros = 0; // Incluye raizal y palenqueros
+	stats_pob_afros = 0;
+	stats_pob_raizal = 0;
+	stats_pob_palenqueros = 0;
 	stats_oficio_ninguno = 0;
 	stats_oficio_estudiante = 0;
 	stats_oficio_empleado = 0;
 	stats_oficio_independiente = 0;
 	stats_oficio_desempleado = 0;
+	stats_edad_menores = 0;
+	stats_edad_20s = 0;
+	stats_edad_30s = 0;
+	stats_edad_40s = 0;
+	stats_edad_50s = 0;
+	stats_edad_60s = 0;
+	stats_edad_70s = 0;
+	stats_edad_80s = 0;
 	function panorama(a) {
             $("#consulta-instancias").html(a[1]);
 			$("#consulta-locales").html(a[2]);
@@ -227,20 +237,42 @@
 			stats_mayor = a[15];
 			stats_pob_ninguna = a[16]+a[20];
 			stats_pob_indigena = a[17];
-			stats_pob_afros = a[18]+a[19]+a[21];
+			stats_pob_afros = a[18];
+			stats_pob_raizal = a[19];
+			stats_pob_palenqueros = a[21];
 			stats_oficio_ninguno = a[22];
 			stats_oficio_estudiante = a[23];
 			stats_oficio_empleado = a[24];
 			stats_oficio_independiente = a[25];
 			stats_oficio_desempleado = a[26];
+			stats_edad_menores = a[27];
+			stats_edad_20s = a[28];
+			stats_edad_30s = a[29];
+			stats_edad_40s = a[30];
+			stats_edad_50s = a[31];
+			stats_edad_60s = a[32];
+			stats_edad_70s = a[33];
+			stats_edad_80s = a[34];
     }
 	// Consulta detalle de cada consejo
 	function detalleconsejo(a) {
 		var b = "<h4 style='text-align:center;text-transform: uppercase;font-size: 24px;'>"+ a[1] +"</h4><div class='program-info'></div>";
 		representados = a[8];
+		let count_representados = 0;
+		for (const char of representados) {
+		  if (char === "*") {
+			count_representados++;
+		  }
+		}
 		representados = representados.replace(/\*/g,'<br>&#183; ');
 		representados = representados.replace(/<br>/,'');
 		desiertos = a[9];
+		let count_desiertos = 0;
+		for (const char of desiertos) {
+		  if (char === "*") {
+			count_desiertos++;
+		  }
+		}
 		desiertos = desiertos.replace(/\*/g,'<br>&#183; ');
 		desiertos = desiertos.replace(/<br>/,'');
 		contacto = "<a class='enlace' href='mailto:"+ a[15] +"' target='_blank'>"+ a[15] +"</a>";
@@ -250,12 +282,12 @@
 		programinfo += '<tr><td class="property">Consejeros(as) Electos 2023-2027</td><td class="property-value">'+ a[5] +'</td></tr>';
 		programinfo += '<tr><td class="property">Consejeros(as) Activos</td><td class="property-value">'+ a[6] +'</td></tr>';
 		programinfo += '<tr><td class="property">Consejeros(as) Inactivos</td><td class="property-value">'+ a[7] +'</td></tr>';
-		programinfo += '<tr><td class="property">Sectores Representados</td><td class="property-value">'+ representados +'</td></tr>';
-		programinfo += '<tr><td class="property">Sectores Desiertos</td><td class="property-value">'+ desiertos +'</td></tr>';
+		programinfo += '<tr><td class="property">Sectores Representados: '+count_representados+'</td><td class="property-value">'+ representados +'</td></tr>';
+		programinfo += '<tr><td class="property">Sectores Desiertos: '+count_desiertos+'</td><td class="property-value">'+ desiertos +'</td></tr>';
 		programinfo += '<tr><td class="property">Sesiones en 2023</td><td class="property-value">'+ a[10] +'</td></tr>';
 		programinfo += '<tr><td class="property">Sesiones en 2024</td><td class="property-value">'+ a[11] +'</td></tr>';
-		programinfo += '<tr><td class="property">Total de Sesiones en la Vigencia</td><td class="property-value">'+ a[12] +'</td></tr>';
-		programinfo += '<tr><td class="property">Porcentaje Medio de Asistencia</td><td class="property-value">'+ a[16] +'</td></tr>';
+		programinfo += '<tr><td class="property">Total de Sesiones Acumuladas en las Vigencias</td><td class="property-value">'+ a[12] +'</td></tr>';
+		programinfo += '<tr><td class="property">Porcentaje Promedio de Asistencia</td><td class="property-value">'+ a[16] +'</td></tr>';
 		programinfo += '<tr><td class="property">Reglamento Aprobado</td><td class="property-value">'+ a[2] +'</td></tr>';
 		programinfo += '<tr><td class="property">Agenda Participativa Anual (2024)</td><td class="property-value">'+ a[3] +'</td></tr>';
 		programinfo += '<tr><td class="property">Secretaria(o) Técnico</td><td class="property-value">'+ a[14] +'</td></tr>';
@@ -364,7 +396,7 @@
 		animationEnabled: true,
 		theme: "light1",
 		title: {
-			text: "Rango Etario",
+			text: "Rangos de Edad",
 			fontFamily: "Source Sans Pro",
 			fontWeight: "bold"
 		},
@@ -374,10 +406,14 @@
 			type: "column",
 			fontFamily: "Source Sans Pro",
 			dataPoints: [
-				{ label: "Niñas y niños",  y: stats_nino, indexLabelFontFamily: "Source Sans Pro"  },
-				{ label: "Jóvenes", y: stats_joven, indexLabelFontFamily: "Source Sans Pro"  },
-				{ label: "Adultos", y: stats_adulto, indexLabelFontFamily: "Source Sans Pro" },
-				{ label: "Personas Mayores",  y: stats_mayor, indexLabelFontFamily: "Source Sans Pro"  }
+				{ label: "Hasta 20",  y: stats_edad_menores, indexLabelFontFamily: "Source Sans Pro"  },
+				{ label: "21-30", y: stats_edad_20s, indexLabelFontFamily: "Source Sans Pro"  },
+				{ label: "31-40", y: stats_edad_30s, indexLabelFontFamily: "Source Sans Pro" },
+				{ label: "41-50", y: stats_edad_40s, indexLabelFontFamily: "Source Sans Pro" },
+				{ label: "51-60", y: stats_edad_50s, indexLabelFontFamily: "Source Sans Pro" },
+				{ label: "61-70", y: stats_edad_60s, indexLabelFontFamily: "Source Sans Pro" },
+				{ label: "71-80", y: stats_edad_70s, indexLabelFontFamily: "Source Sans Pro" },
+				{ label: "81-90",  y: stats_edad_80s, indexLabelFontFamily: "Source Sans Pro"  }
 			]
 		}
 		]
@@ -431,7 +467,9 @@
 			dataPoints: [
 				{ label: "Ninguna", y: stats_pob_ninguna, indexLabelFontFamily: "Source Sans Pro" },
 				{ label: "Indígenas", y: stats_pob_indigena, indexLabelFontFamily: "Source Sans Pro" },
-				{ label: "Afro, Raizal o Palenqueros", y: stats_pob_afros, indexLabelFontFamily: "Source Sans Pro" }
+				{ label: "Afros", y: stats_pob_afros, indexLabelFontFamily: "Source Sans Pro" },
+				{ label: "Raizales", y:  stats_pob_raizal, indexLabelFontFamily: "Source Sans Pro" },
+				{ label: "Palenqueros", y: stats_pob_palenqueros, indexLabelFontFamily: "Source Sans Pro" }
 			]
 		}]
 	};
@@ -471,7 +509,7 @@
 		<tr>
 			<td><div id='' class='desc'>Participantes de mesas temáticas</div></td>
 			<td><div id='' class='desc'>Total de participantes</div></td>
-			<td><div id='' class='desc'>Total de sesiones en la vigencia</div></td>
+			<td><div id='' class='desc'>Total de sesiones en las vigencias</div></td>
 		</tr>
 		<tr>
 			<td colspan='3'>
@@ -480,7 +518,7 @@
 		</tr>
 		<tr>
 			<td colspan='3'>
-				<div class='boton consulta-stats'>Caracterización Sociodemográfica</div>
+				<div class='boton consulta-stats'>Estadísticas Sociodemográficas</div>
 			</td>
 		</tr>
 	</table>
@@ -582,7 +620,7 @@
 	<table class='default-5 tabla-sistema'>
 		<tr>
 			<td>
-				<div class='txt-flotante-100'>Caracterización Sociodemográfica del Sistema Distrital de Arte, Cultura y Patrimonio</div>
+				<div class='txt-flotante-100'>Estadísticas Sociodemográficas del Sistema Distrital de Arte, Cultura y Patrimonio</div>
 			</td>
 		</tr>
 		<tr>
