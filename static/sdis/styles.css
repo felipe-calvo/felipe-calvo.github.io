@@ -82,23 +82,29 @@ h2.titulo-centro {
   margin:auto; 
   white-space:wrap; 
   border:2px solid #222;
-  padding:5px 11px 3px 11px;
+  padding: 20px 11px 15px 11px;
   word-break: break-word;
 }
 h2.titulo-centro:before, h2.titulo-centro:after {
     background-color: #c50000;
     position:absolute; 
     content: '';
-    height: 7px;
-    width: 7px; 
+    height: 15px;
+    width: 15px; 
 	border-radius:50%;
-    bottom: 24px;
+    bottom: 34px;
 }
 h2.titulo-centro:before {
-   left:-20px;
+   left:-25px;
 }
 h2.titulo-centro:after {
-   right:-20px;
+   right:-25px;
+}
+.dimension {
+	font-family: 'Figtree', system-ui, -apple-system, Segoe UI, Helvetica, Arial, 'Apple Color Emoji','Segoe UI Emoji';
+	font-size: 22px;
+	margin: 30px 0 20px;
+	font-weight: 900;
 }
 /* Tipografía complementaria */
 h3 {
@@ -171,6 +177,16 @@ p { margin: 0; color: #333; }
   height: auto;
   border-radius: 12px;
   margin: 40px 0;
+  /* box-shadow: 0 6px 18px rgba(0,0,0,.08); */
+}
+
+.imagen-full-escalada img {
+  width: 100%;
+  max-width: 800px;
+  display: block;
+  height: auto;
+  border-radius: 12px;
+  margin: 40px auto;
   /* box-shadow: 0 6px 18px rgba(0,0,0,.08); */
 }
 
