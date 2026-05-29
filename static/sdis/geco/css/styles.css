@@ -1,0 +1,646 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Figtree:wght@400;500;600;700;800&display=swap");
+
+:root {
+  --datalogo-green: #1FAE76;
+  --datalogo-ink: #16312a;
+  --datalogo-muted: #5f6f6a;
+  --datalogo-soft: #f4fbf7;
+  --datalogo-yellow: #f6c945;
+  --datalogo-red: #e51231;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  color: var(--datalogo-ink);
+  font-family: "Figtree", Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: #ffffff;
+}
+
+h1,
+h2,
+h3,
+.figure-card strong {
+  font-family: "Anton", Impact, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.datalogo-navbar {
+  background: var(--datalogo-green);
+  box-shadow: 0 0 0 rgba(22, 49, 42, 0);
+  min-height: 125px;
+  position: sticky;
+  top: 0;
+  transition: min-height 220ms ease, box-shadow 220ms ease;
+  will-change: min-height;
+  z-index: 1030;
+}
+
+.datalogo-navbar.is-compact {
+  box-shadow: 0 10px 28px rgba(22, 49, 42, 0.18);
+  min-height: 93px;
+}
+
+.datalogo-brand {
+  padding: 22px 16px;
+  transition: padding 220ms ease;
+  will-change: padding;
+}
+
+.datalogo-navbar.is-compact .datalogo-brand {
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.datalogo-brand img {
+  display: block;
+  height: auto;
+  max-height: 91px;
+  max-width: min(364px, calc(100vw - 64px));
+  transition: max-height 220ms ease, transform 220ms ease;
+  will-change: max-height;
+}
+
+.datalogo-navbar.is-compact .datalogo-brand img {
+  max-height: 70px;
+}
+
+.site-header {
+  background-image: url("../img/patron-header.png");
+  background-position: center;
+  background-repeat: repeat;
+  padding: clamp(56px, 8vw, 104px) 0;
+}
+
+.site-header h1 {
+  font-size: clamp(2rem, 4vw, 4rem);
+  line-height: 1.05;
+  margin-bottom: 1rem;
+  color: #F8F4E1;
+}
+
+.header-lead {
+  color: #F8F4E1;
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  margin: 0 auto;
+  max-width: 760px;
+}
+
+.figure-card {
+  background: #ffffff;
+  border: 1px solid rgba(31, 174, 118, 0.2);
+  border-left: 8px solid var(--datalogo-green);
+  border-radius: 8px;
+  box-shadow: 0 18px 45px rgba(22, 49, 42, 0.12);
+  height: 100%;
+  padding: clamp(22px, 4vw, 34px);
+}
+
+.figure-label {
+  color: var(--datalogo-muted);
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+  text-transform: uppercase;
+}
+
+.figure-card strong {
+  color: var(--datalogo-green);
+  display: block;
+  font-size: clamp(2.1rem, 5vw, 3.8rem);
+  font-weight: 400;
+  line-height: 1;
+  margin-bottom: 0.8rem;
+}
+
+.figure-card p {
+  color: var(--datalogo-muted);
+  margin: 0;
+}
+
+.explore-section,
+.ask-section {
+  padding: clamp(56px, 8vw, 96px) 0;
+}
+
+.explore-section {
+  background: #ffffff;
+}
+
+.explore-section h2,
+.ask-section h2 {
+  font-size: clamp(1.9rem, 3.5vw, 3rem);
+  margin-bottom: 1.4rem;
+}
+
+.section-description {
+  color: var(--datalogo-muted);
+  font-size: 1.1rem;
+  margin: -0.4rem auto 0;
+  max-width: 760px;
+}
+
+.explore-card {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid rgba(22, 49, 42, 0.12);
+  border-radius: 8px;
+  box-shadow: 0 14px 36px rgba(22, 49, 42, 0.08);
+  display: flex;
+  flex-direction: column;
+  padding: clamp(24px, 4vw, 40px);
+  text-align: center;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.explore-card:hover {
+  box-shadow: 0 18px 44px rgba(22, 49, 42, 0.14);
+  transform: translateY(-4px);
+}
+
+.icon-circle {
+  align-items: center;
+  background: var(--datalogo-green);
+  border-radius: 50%;
+  color: #ffffff;
+  display: inline-flex;
+  height: 84px;
+  justify-content: center;
+  margin-bottom: 1.4rem;
+  width: 84px;
+}
+
+.icon-circle .material-symbols-rounded {
+  font-size: 42px;
+  line-height: 1;
+}
+
+.explore-card h3 {
+  font-size: clamp(1.2rem, 2vw, 1.45rem);
+  margin-bottom: 0.8rem;
+}
+
+.explore-card p {
+  color: var(--datalogo-muted);
+  margin: 0;
+  max-width: 480px;
+}
+
+.explore-card-link {
+  color: inherit;
+  display: block;
+  height: 100%;
+  text-decoration: none;
+}
+
+.explore-card-link:focus-visible {
+  border-radius: 8px;
+  outline: 3px solid rgba(31, 174, 118, 0.45);
+  outline-offset: 4px;
+}
+
+.policy-header {
+  background-image: url("../img/patron-morado.png");
+}
+
+.policy-header .row.g-4,
+.sdj-header .row.g-4,
+.investment-header .row.g-4,
+.ecosystem-header .row.g-4 {
+  max-width: 1040px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sdj-header {
+  background-image: url("../img/patron-header-aguamarina.png");
+}
+
+.investment-header {
+  background-image: url("../img/patron-naranja.png");
+}
+
+.ecosystem-header {
+  background-image: url("../img/patron-rojo.png");
+}
+
+.policy-stat-card {
+  min-height: 168px;
+}
+
+.policy-stat-card strong {
+  font-size: clamp(1.75rem, 4vw, 3.15rem);
+  overflow-wrap: anywhere;
+}
+
+.policy-info-section,
+.policy-resources-section {
+  padding: clamp(56px, 8vw, 96px) 0;
+}
+
+.policy-info-section {
+  background: #ffffff;
+}
+
+.policy-copy-block {
+  max-width: 980px;
+  text-align: justify;
+}
+
+.policy-copy-block h3,
+.resource-row h3 {
+  font-size: clamp(1.45rem, 2.6vw, 2.2rem);
+  margin-bottom: 0.8rem;
+}
+
+.policy-copy-block p,
+.resource-row p {
+  color: var(--datalogo-muted);
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+.sdj-schema-image {
+  display: block;
+  height: auto;
+  margin-top: 1rem;
+  max-width: 100%;
+  width: 100%;
+}
+
+.resource-row p {
+  text-align: justify;
+}
+
+.resource-row p:has(a) {
+  text-align: left;
+}
+
+.policy-objectives-block {
+  max-width: 100%;
+}
+
+.policy-objectives-cards {
+  display: grid;
+  gap: 0.85rem;
+  margin-top: 1.2rem;
+}
+
+.policy-objective-card {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid rgba(22, 49, 42, 0.12);
+  border-radius: 8px;
+  box-shadow: 0 10px 26px rgba(22, 49, 42, 0.07);
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 44px minmax(0, 1fr);
+  padding: 1rem 1.15rem;
+}
+
+.objective-number {
+  align-items: center;
+  background: #000000;
+  border-radius: 50%;
+  color: #ffffff;
+  display: inline-flex;
+  font-family: "Figtree", Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  height: 44px;
+  justify-content: center;
+  line-height: 1;
+  width: 44px;
+}
+
+.policy-objective-card p {
+  color: var(--datalogo-muted);
+  font-size: 1.05rem;
+  line-height: 1.42;
+  margin: 0;
+  max-width: none;
+  text-align: left;
+}
+
+.policy-objective-card strong {
+  color: var(--datalogo-ink);
+  font-weight: 800;
+}
+
+.policy-resources-section {
+  background: var(--datalogo-soft);
+}
+
+.resource-row {
+  align-items: flex-start;
+  background: #ffffff;
+  border: 1px solid rgba(22, 49, 42, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 12px 30px rgba(22, 49, 42, 0.08);
+  display: flex;
+  gap: 1rem;
+  height: 100%;
+  padding: clamp(20px, 3vw, 28px);
+}
+
+.resource-row-wide {
+  height: auto;
+}
+
+.knowledge-section {
+  background: #ffffff;
+  padding: clamp(56px, 8vw, 96px) 0;
+}
+
+.dashboards-section {
+  background: var(--datalogo-soft);
+  padding: clamp(56px, 8vw, 96px) 0;
+}
+
+.dashboards-section h2 {
+  font-size: clamp(1.9rem, 3.5vw, 3rem);
+  margin-bottom: 1.4rem;
+}
+
+.dashboard-card {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid rgba(22, 49, 42, 0.12);
+  border-radius: 8px;
+  box-shadow: 0 14px 36px rgba(22, 49, 42, 0.08);
+  color: inherit;
+  display: grid;
+  gap: 1.2rem;
+  grid-template-columns: 84px minmax(0, 1fr);
+  height: 100%;
+  padding: clamp(22px, 4vw, 34px);
+  text-decoration: none;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.dashboard-card:hover,
+.dashboard-card:focus {
+  box-shadow: 0 18px 44px rgba(22, 49, 42, 0.14);
+  color: inherit;
+  transform: translateY(-4px);
+}
+
+.dashboard-card h3 {
+  font-size: clamp(1.25rem, 2.2vw, 1.7rem);
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-card p {
+  color: var(--datalogo-muted);
+  margin: 0;
+}
+
+.knowledge-table {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.knowledge-row {
+  align-items: flex-start;
+  background: #ffffff;
+  border: 1px solid rgba(22, 49, 42, 0.12);
+  border-radius: 8px;
+  box-shadow: 0 12px 30px rgba(22, 49, 42, 0.08);
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 170px minmax(0, 1fr);
+  padding: clamp(18px, 3vw, 28px);
+}
+
+.knowledge-thumb {
+  align-items: flex-start;
+  display: flex;
+  justify-content: center;
+}
+
+.knowledge-thumb img {
+  border: 1px solid rgba(22, 49, 42, 0.12);
+  border-radius: 6px;
+  box-shadow: 0 10px 24px rgba(22, 49, 42, 0.12);
+  height: auto;
+  max-width: 100%;
+}
+
+.knowledge-content h3 {
+  font-size: clamp(1.25rem, 2.2vw, 1.85rem);
+  margin-bottom: 0.7rem;
+}
+
+.knowledge-meta {
+  color: var(--datalogo-muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.knowledge-meta span {
+  display: inline-flex;
+}
+
+.knowledge-ideas {
+  color: var(--datalogo-muted);
+  font-size: 1.02rem;
+  line-height: 1.5;
+  margin: 0;
+  text-align: justify;
+}
+
+.tag-differential {
+  background: var(--datalogo-green);
+  border-radius: 999px;
+  color: #ffffff;
+  display: inline-flex;
+  font-size: 0.88rem;
+  font-weight: 800;
+  margin-bottom: 0.8rem;
+  padding: 0.35rem 0.75rem;
+}
+
+.repository-loading,
+.repository-error {
+  color: var(--datalogo-muted);
+  margin: 0;
+  text-align: center;
+}
+
+.resource-icon {
+  align-items: center;
+  background: var(--datalogo-green);
+  border-radius: 50%;
+  color: #ffffff;
+  display: inline-flex;
+  flex: 0 0 auto;
+  height: 58px;
+  justify-content: center;
+  width: 58px;
+}
+
+.resource-icon .material-symbols-rounded {
+  font-size: 30px;
+}
+
+.separador {
+  display:block;
+  height: 18px;
+  clear: both;
+}
+
+.ask-section {
+  background: var(--datalogo-soft);
+}
+
+.search-link {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid rgba(22, 49, 42, 0.16);
+  border-radius: 999px;
+  box-shadow: 0 12px 32px rgba(22, 49, 42, 0.1);
+  color: var(--datalogo-muted);
+  display: flex;
+  gap: 0.75rem;
+  margin: 0 auto;
+  max-width: 760px;
+  min-height: 62px;
+  padding: 0.9rem 1.25rem;
+  text-align: left;
+  text-decoration: none;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.search-link:hover,
+.search-link:focus {
+  border-color: var(--datalogo-green);
+  box-shadow: 0 14px 36px rgba(31, 174, 118, 0.18);
+  color: var(--datalogo-ink);
+  outline: none;
+}
+
+.search-link .material-symbols-rounded {
+  color: var(--datalogo-green);
+  flex: 0 0 auto;
+  font-size: 30px;
+}
+
+.search-placeholder {
+  overflow-wrap: anywhere;
+}
+
+.made-with-love {
+  background: var(--datalogo-soft);
+  color: var(--datalogo-ink);
+  padding: 28px 0;
+}
+
+.made-with-love p {
+  font-weight: 500;
+  margin: 0;
+}
+
+#sp-footer {
+  background-color: var(--datalogo-red);
+  color: #ffffff;
+  padding: 12px 0;
+}
+
+#sp-footer a {
+  color: #ffffff;
+}
+
+#sp-footer img {
+  height: auto;
+  max-width: 100%;
+}
+
+@media (max-width: 767.98px) {
+  .datalogo-navbar {
+    min-height: 106px;
+  }
+
+  .datalogo-navbar.is-compact {
+    min-height: 81px;
+  }
+
+  .datalogo-brand {
+    padding-bottom: 18px;
+    padding-top: 18px;
+  }
+
+  .datalogo-brand img {
+    max-height: 73px;
+  }
+
+  .datalogo-navbar.is-compact .datalogo-brand img {
+    max-height: 57px;
+  }
+
+  .site-header {
+    padding-top: 48px;
+  }
+
+  .figure-card {
+    border-left-width: 6px;
+  }
+
+  .search-link {
+    align-items: flex-start;
+    border-radius: 28px;
+    min-height: auto;
+  }
+
+  .policy-objective-card {
+    grid-template-columns: 40px minmax(0, 1fr);
+  }
+
+  .objective-number {
+    height: 40px;
+    width: 40px;
+  }
+
+  .knowledge-row {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .dashboard-card .icon-circle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .knowledge-thumb {
+    justify-content: flex-start;
+  }
+
+  .knowledge-thumb img {
+    max-width: 150px;
+  }
+
+  #sp-footer .row {
+    row-gap: 10px;
+    text-align: center;
+  }
+
+  #sp-footer .col-md-1 {
+    border-right: 0 !important;
+  }
+
+  #sp-footer .col-md-6 {
+    text-align: center !important;
+  }
+}
