@@ -9,10 +9,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!isCompact && window.scrollY > compactAt) {
       navbar.classList.add("is-compact");
+      document.body.classList.add("nav-is-compact");
     }
 
     if (isCompact && window.scrollY < expandAt) {
       navbar.classList.remove("is-compact");
+      document.body.classList.remove("nav-is-compact");
+    }
+
+    if (window.scrollY <= compactAt && window.scrollY >= expandAt) {
+      document.body.classList.toggle("nav-is-compact", navbar.classList.contains("is-compact"));
     }
   };
 

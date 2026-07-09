@@ -30,15 +30,19 @@ h3,
   text-transform: uppercase;
 }
 
+.site-chrome {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+}
+
 .datalogo-navbar {
   background: var(--datalogo-green);
   box-shadow: 0 0 0 rgba(22, 49, 42, 0);
   min-height: 125px;
-  position: sticky;
-  top: 0;
+  position: relative;
   transition: min-height 220ms ease, box-shadow 220ms ease;
   will-change: min-height;
-  z-index: 1030;
 }
 
 .datalogo-navbar.is-compact {
@@ -68,6 +72,55 @@ h3,
 
 .datalogo-navbar.is-compact .datalogo-brand img {
   max-height: 70px;
+}
+
+.site-menu {
+  background: var(--datalogo-ink);
+  color: #f8f4e1;
+}
+
+.site-menu-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-menu-list li {
+  display: flex;
+}
+
+.site-menu a {
+  align-items: center;
+  color: #f8f4e1;
+  display: inline-flex;
+  font-family: "Figtree", Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  gap: 0.45rem;
+  justify-content: center;
+  line-height: 1.15;
+  padding: 18px 22px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+.site-menu a:hover,
+.site-menu a:focus {
+  background: rgba(248, 244, 225, 0.12);
+  color: #f8f4e1;
+  outline: none;
+}
+
+.site-menu .material-symbols-rounded {
+  font-size: 20px;
+  line-height: 1;
 }
 
 .site-header {
@@ -588,6 +641,19 @@ h3,
 
   .site-header {
     padding-top: 48px;
+  }
+
+  .site-menu-list {
+    align-items: stretch;
+  }
+
+  .site-menu a {
+    flex: 1 1 100%;
+    padding: 14px 12px;
+  }
+
+  .site-menu-list li {
+    flex: 1 1 100%;
   }
 
   .figure-card {
