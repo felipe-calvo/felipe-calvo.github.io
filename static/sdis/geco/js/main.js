@@ -77,8 +77,8 @@ document.addEventListener("DOMContentLoaded", () => {
           meta.className = "knowledge-meta";
           const author = document.createElement("span");
           const authorLabel = document.createElement("strong");
-          authorLabel.textContent = "Autor:";
-          author.append(authorLabel, document.createTextNode(" "), documentItem.author || "No especificado");
+          authorLabel.textContent = "Autor: ";
+          author.append(authorLabel, documentItem.author || "No especificado");
           const year = document.createElement("span");
           const yearLabel = document.createElement("strong");
           yearLabel.textContent = "Año:";
